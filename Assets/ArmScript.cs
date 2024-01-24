@@ -33,7 +33,6 @@ public class ArmScript : MonoBehaviour
             angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
-            Debug.Log(transform.rotation.z);
 
         }
         if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
@@ -43,7 +42,7 @@ public class ArmScript : MonoBehaviour
             angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
-            Debug.Log(transform.rotation.z);
+            
         }
 
 
