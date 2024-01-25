@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 moveSpeed = new Vector2(horizontalInput, verticalInput).normalized * Time.deltaTime * playerSpeed;
-        Debug.Log(moveSpeed.sqrMagnitude);
+        //Debug.Log(moveSpeed.sqrMagnitude);
         transform.Translate(moveSpeed);
     }
 }

@@ -6,11 +6,18 @@ using UnityEngine;
 public class SimpleBulletScript : MonoBehaviour
 {
     public float bulletSpeed;
+    public float damage = 10;
+    private PlayerMovement PlayerMovement;
+    private EnemyScript EnemyScript;
+    //public bool[] elements;
+    //Comment what value = what element
+    //elements[0] = fire
 
-    // Start is called before the first frame update
+    public bool isFire = false;
+
     void Start()
     {
-        
+        Invoke("KillProjectile", 5);
     }
 
     // Update is called once per frame
@@ -24,6 +31,15 @@ public class SimpleBulletScript : MonoBehaviour
         {
             Debug.Log("MEGA MEGA SUCESS");
         }
-        Debug.Log("SUCESS");
+        if (collision.gameObject.GetComponent<EnemyScript>())
+        {
+            var enemy = collision.gameObject.GetComponent<EnemyScript>();
+            enemy.TakeDamage(damage);
+            enemy.ApplyElement(isFire);
+        }
+        //playerMovement.playerHealth = playerMovement.playerHealth - damage;
+    }
+    public void KillProjectile(){
+        Destroy(gameObject);
     }
 }
