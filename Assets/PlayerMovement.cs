@@ -4,48 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    public float movementX = 0;
-    public float movementY = 0;
-    public Vector2 Movement;
     public float playerSpeed;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    float verticalInput;
+    float horizontalInput;
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (horizontalInput != 0)
         {
-            movementX = -1;
-            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(-horizontalInput, transform.localScale.y, transform.localScale.z);
         }
-        else if(Input.GetKey(KeyCode.D))
-        {
-            movementX = 1;
-            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-        }
-        else
-        {
-            movementX = 0;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            movementY = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            movementY = -1;
-        }
-        else
-        {
-            movementY = 0;
-        }
-        transform.Translate(new Vector2(movementX, movementY).normalized * Time.deltaTime * playerSpeed);
+
+        Vector2 moveSpeed = new Vector2(horizontalInput, verticalInput).normalized * Time.deltaTime * playerSpeed;
+        Debug.Log(moveSpeed.sqrMagnitude);
+        transform.Translate(moveSpeed);
     }
 }
