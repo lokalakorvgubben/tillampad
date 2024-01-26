@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     public bool onFire = false;
     public float desiredDistance = 0;
     public Animator anim;
+    public bool checkfordistance = false;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,12 @@ public class EnemyScript : MonoBehaviour
     {
         float step = speed * Time.deltaTime;
         float distance = Vector2.Distance(player.transform.position, transform.position);
+
+        if (checkfordistance)
+        {
+            Debug.Log(distance);
+        }
+
 
         if(distance <= desiredDistance)
         {

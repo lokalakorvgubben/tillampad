@@ -11196,7 +11196,8 @@ MonoBehaviour:
   player: {fileID: 0}
   onFire: 0
   desiredDistance: 0
-  anim: {fileID: 0}
+  anim: {fileID: 8342273196364105856}
+  checkfordistance: 1
 --- !u!61 &8342273196364105858
 BoxCollider2D:
   m_ObjectHideFlags: 0
