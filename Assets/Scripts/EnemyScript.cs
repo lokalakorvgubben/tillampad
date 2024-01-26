@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -10,6 +11,8 @@ public class EnemyScript : MonoBehaviour
     public float enemyHealth = 100;
     public GameObject player;
     public bool onFire = false;
+    public float desiredDistance = 0;
+    public Animator anim;
 
 
     // Start is called before the first frame update
@@ -22,8 +25,16 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         float step = speed * Time.deltaTime;
+        float distance = Vector2.Distance(player.transform.position, transform.position);
 
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+        if(distance <= desiredDistance)
+        {
+            anim.SetTrigger("Attack");
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+        }
 
         if(enemyHealth <= 0)
         {
