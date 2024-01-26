@@ -36,6 +36,7 @@ public class EnemyScript : MonoBehaviour
         if(onFire == true)
         {
             enemyHealth -= 0.1f;
+            Debug.Log(enemyHealth);
         }
     }
     void Die()
@@ -54,11 +55,13 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("DET FUNKAAAAAAAAAAAAAAAAR");
             onFire = true;
             transform.GetChild(1).gameObject.SetActive(true);
+            Invoke("CancelFire", 4);
         }
+    }
 
-
-
-
-
+    void CancelFire()
+    {
+        onFire = false;
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }
