@@ -13,7 +13,9 @@ public class EnemyScript : MonoBehaviour
     public bool onFire = false;
     public float desiredDistance = 0;
     public Animator anim;
-    public bool checkfordistance = false;
+    public bool StandstillAttack = false;
+    private bool Attack = false;
+    public float recoil;
 
 
     // Start is called before the first frame update
@@ -28,17 +30,14 @@ public class EnemyScript : MonoBehaviour
         float step = speed * Time.deltaTime;
         float distance = Vector2.Distance(player.transform.position, transform.position);
 
-        if (checkfordistance)
-        {
-            Debug.Log(distance);
-        }
-
 
         if(distance <= desiredDistance)
         {
             anim.SetTrigger("Attack");
+            Attack = true;
+            Invoke("CancelAttack", recoil);
         }
-        else
+        else if(!StandstillAttack || !Attack)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         }
@@ -81,5 +80,10 @@ public class EnemyScript : MonoBehaviour
     {
         onFire = false;
         transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    void CancelAttack()
+    {
+        Attack = false;
     }
 }
