@@ -6,7 +6,8 @@ public class ArmScript : MonoBehaviour
 {
 
     public bool isLeftArm;
-    public GameObject bullet;
+    public GameObject fireBullet;
+    public GameObject lightningBullet;
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
 
@@ -36,7 +37,7 @@ public class ArmScript : MonoBehaviour
                 mouse_pos.y = mouse_pos.y - object_pos.y;
                 angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
                 ShootTime = 0;
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
@@ -45,7 +46,7 @@ public class ArmScript : MonoBehaviour
                 mouse_pos.y = mouse_pos.y - object_pos.y;
                 angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
                 ShootTime = 0;
             }
         }
