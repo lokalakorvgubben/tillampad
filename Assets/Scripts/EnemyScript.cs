@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -11,10 +12,18 @@ public class EnemyScript : MonoBehaviour
     public float enemyHealth = 100;
     public GameObject player;
     public bool onFire = false;
-    public float desiredDistance = 0;
+    private float time;
+
+    //Desired Distance for Enemy to Attack
+    public float desiredDistanceX = 0;
+    public float desiredDistanceY = 0;
     public Animator anim;
+
+    //If the enemy will stop moving after attacking
     public bool StandstillAttack = false;
-    private bool Attack = false;
+    public bool Attack = false;
+    public float TimeUntilAttack;
+    public float TimeUntilHit;
     public float recoil;
 
 
@@ -22,25 +31,45 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        time = TimeUntilAttack;
     }
 
     // Update is called once per frame
     void Update()
     {
         float step = speed * Time.deltaTime;
-        float distance = Vector2.Distance(player.transform.position, transform.position);
+        time += Time.deltaTime;
 
+        //Distance of X and Y
+        float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
+        float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
-        if(distance <= desiredDistance)
+        Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
+
+        if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
         {
-            anim.SetTrigger("Attack");
-            Attack = true;
-            Invoke("CancelAttack", recoil);
+            Invoke("StandstillHit", TimeUntilHit);
+        }
+        else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
+        {
+            Invoke("MovingHit", TimeUntilHit);
         }
         else if(!StandstillAttack || !Attack)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
         }
+        else if (Attack && StandstillAttack)
+        {
+            Debug.Log("Attack");
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            anim.SetBool("Attack", true);
+            Attack = true;
+            Invoke("CancelAttack", recoil);
+        }
+
 
         if(enemyHealth <= 0)
         {
@@ -82,8 +111,23 @@ public class EnemyScript : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
+    void StandstillHit()
+    {
+        anim.SetBool("Attack", true);
+        Attack = true;
+        Invoke("CancelAttack", recoil);
+    }
+
+    void MovingHit()
+    {
+        anim.SetBool("Attack", true);
+        Attack = true;
+    }
+
     void CancelAttack()
     {
         Attack = false;
+        anim.SetBool("Attack", false);
+        time = 0;
     }
 }

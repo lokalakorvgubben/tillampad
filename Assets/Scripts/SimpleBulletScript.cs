@@ -14,6 +14,7 @@ public class SimpleBulletScript : MonoBehaviour
     //elements[0] = fire
 
     public bool isFire = false;
+    public bool isLightning = false;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class SimpleBulletScript : MonoBehaviour
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             enemy.TakeDamage(damage);
             enemy.ApplyElement(isFire);
+            enemy.ApplyElement(isLightning);
         }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;
     }

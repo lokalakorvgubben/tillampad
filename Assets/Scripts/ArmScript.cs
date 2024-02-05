@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ArmScript : MonoBehaviour
 {
-
+    public Transform gunPoint;
     public bool isLeftArm;
     public GameObject fireBullet;
     public GameObject lightningBullet;
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
+    public float spread;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,9 @@ public class ArmScript : MonoBehaviour
     {
         Vector3 mouse_pos;
         Vector3 object_pos;
+
+        float x = Random.Range(-spread, spread);
+
         float angle;
         mouse_pos = Input.mousePosition;
         object_pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -37,7 +41,7 @@ public class ArmScript : MonoBehaviour
                 mouse_pos.y = mouse_pos.y - object_pos.y;
                 angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
                 ShootTime = 0;
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
