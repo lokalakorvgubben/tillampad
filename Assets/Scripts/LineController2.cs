@@ -21,13 +21,24 @@ public class LineController2 : MonoBehaviour
     private Transform target;
     private Transform startEnemy;
 
+    private float timer = 0;
+    public float dieTimer = 1;
+
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
     }
+    void Die()
+    {
+        Destroy(gameObject);
+    }
     private void Update()
     {
-
+        timer += Time.deltaTime;
+        if(timer > dieTimer)
+        {
+            Die();
+        }
         lineRenderer.SetPosition(1, target.position);
         lineRenderer.SetPosition(0, startEnemy.position);
 
