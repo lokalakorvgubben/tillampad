@@ -25,6 +25,8 @@ public class EnemyScript : MonoBehaviour
 
     public Transform targets;
 
+    private float chainDamage = 10;
+
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +94,7 @@ public class EnemyScript : MonoBehaviour
     }
     void ChainLightning(int lightningJumps)
     {
+        onLightning = true;
         GameObject closestTarget = FindClosestTarget();
         Debug.Log(lightningJumps);
         if (closestTarget != null && lightningJumps > 0)
@@ -106,9 +109,9 @@ public class EnemyScript : MonoBehaviour
             newLightning.AssignTarget(transform, closestTarget.transform);
 
             //calla function i enemyscript av closest target.
-
-
-
+            var nextEnemy = closestTarget.gameObject.GetComponent<EnemyScript>();
+            nextEnemy.TakeDamage(chainDamage);
+            nextEnemy.ChainLightning(lightningJumps);
 
         }
         else
@@ -125,7 +128,7 @@ public class EnemyScript : MonoBehaviour
         Vector3 position = transform.position;
         foreach (GameObject target in targets)
         {
-            if (target == this.gameObject)
+            if (target == this.gameObject || target.gameObject.GetComponent<EnemyScript>().onLightning == true)
             {
                 continue;
             }
