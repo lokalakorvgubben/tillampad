@@ -22,10 +22,17 @@ public class SimpleBulletScript : MonoBehaviour
         Invoke("KillProjectile", 5);
     }
 
+    public void Initialize(float GunDamage)
+    {
+        damage = GunDamage;
+        Invoke("KillProjectile", 3);
+    }
+
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector2.right * Time.deltaTime * bulletSpeed);
+        Debug.Log(damage);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -13,6 +13,7 @@ public class ArmScript : MonoBehaviour
     [Range(0, 10)] public float TimeToShoot = 1;
     public float spread;
     public int bulletsToShoot = 1;
+    public float GunDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,8 @@ public class ArmScript : MonoBehaviour
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
+                    Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 
                 ShootTime = 0;
@@ -58,7 +60,8 @@ public class ArmScript : MonoBehaviour
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
+                    Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 
                 ShootTime = 0;

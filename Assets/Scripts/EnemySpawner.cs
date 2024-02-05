@@ -5,6 +5,20 @@ using UnityEngine.UIElements;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [System.Serializable]
+    public class EnemyVariant
+    {
+        public GameObject enemyPrefab;
+        public float spawnWeight = 1f; // Adjust as needed
+    }
+
+    private int enemyCount = 0;
+    public int maxEnemies = 1;
+    public List<EnemyVariant> enemyVariants = new List<EnemyVariant>();
+    private List<GameObject> spawnedEnemies = new List<GameObject>();
+
+
+
     public float spawnInterval = 3f;
     public float nextTimeToSpawn = 0f;
     private GameObject player;
@@ -22,21 +36,27 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - nextTimeToSpawn > 1 * spawnInterval)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        enemyCount = enemies.Length;
+        if(enemyCount < maxEnemies)
         {
-            nextTimeToSpawn = Time.time;
-
-            Vector3 spawnPosition = MakeRandomSpawnPos();
-
-            spawnPosition += player.transform.position;
-            GameObject newEnemy = Instantiate(EnemyTest, enemies.transform);
-            newEnemy.transform.position = spawnPosition;
-
-            Debug.Log("spawn");
-            Debug.Log(player.transform.position);
-
+            SpawnEnemy();
         }
     }
+
+    private void SpawnEnemy()
+    {
+        Vector3 randomSpawnPoint = MakeRandomSpawnPos();
+        EnemyVariant randomEnemyVariant = GetRandomEnemyVariant();
+
+        if (randomSpawnPoint != null && randomEnemyVariant != null)
+        {
+            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint));
+            spawnedEnemies.Add(newEnemy);
+        }
+    }
+
     private Vector3 MakeRandomSpawnPos()
     {
         Vector3 spawnPosition = new Vector3();
@@ -57,5 +77,32 @@ public class EnemySpawner : MonoBehaviour
         spawnPosition.z = 0;
 
         return spawnPosition;
+    }
+
+    private EnemyVariant GetRandomEnemyVariant()
+    {
+        if (enemyVariants.Count > 0)
+        {
+            float totalWeight = 0f;
+
+            foreach (EnemyVariant variant in enemyVariants)
+            {
+                totalWeight += variant.spawnWeight;
+            }
+
+            float randomValue = Random.Range(0f, totalWeight);
+
+            foreach (EnemyVariant variant in enemyVariants)
+            {
+                if (randomValue <= variant.spawnWeight)
+                {
+                    return variant;
+                }
+
+                randomValue -= variant.spawnWeight;
+            }
+        }
+
+        return null;
     }
 }
