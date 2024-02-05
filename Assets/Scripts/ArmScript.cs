@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class ArmScript : MonoBehaviour
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
     public float spread;
+    public int bulletsToShoot = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +25,6 @@ public class ArmScript : MonoBehaviour
     {
         Vector3 mouse_pos;
         Vector3 object_pos;
-
-        float x = Random.Range(-spread, spread);
 
         float angle;
         mouse_pos = Input.mousePosition;
@@ -41,7 +41,12 @@ public class ArmScript : MonoBehaviour
                 mouse_pos.y = mouse_pos.y - object_pos.y;
                 angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
+                for(int i = 0; i < bulletsToShoot; i++)
+                {
+                    float x = Random.Range(-spread, spread);
+                    Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
+                }
+
                 ShootTime = 0;
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
@@ -50,7 +55,12 @@ public class ArmScript : MonoBehaviour
                 mouse_pos.y = mouse_pos.y - object_pos.y;
                 angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                for(int i = 0; i < bulletsToShoot; i++)
+                {
+                    float x = Random.Range(-spread, spread);
+                    Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)));
+                }
+
                 ShootTime = 0;
             }
         }

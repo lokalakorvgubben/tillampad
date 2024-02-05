@@ -11,16 +11,13 @@ public class EnemyScript : MonoBehaviour
     public float speed = 1;
     public float enemyHealth = 100;
     public GameObject player;
-
     public bool onFire = false;
+    public bool onLightning = false;
     private float time;
 
     //Desired Distance for Enemy to Attack
     public float desiredDistanceX = 0;
     public float desiredDistanceY = 0;
-    public bool onLightning = false;
-
-    public float desiredDistance = 0;
     public Animator anim;
 
     //If the enemy will stop moving after attacking
@@ -28,11 +25,15 @@ public class EnemyScript : MonoBehaviour
     public bool Attack = false;
     public float TimeUntilAttack;
     public float TimeUntilHit;
+
+    //Time between attacks
     public float recoil;
 
     public GameObject lightning;
 
     public Transform targets;
+
+    private float chainDamage = 10;
 
 
     // Start is called before the first frame update
@@ -56,11 +57,11 @@ public class EnemyScript : MonoBehaviour
 
         if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
         {
-            Invoke("StandstillHit", TimeUntilHit);
+            Invoke("Hit", TimeUntilHit);
         }
         else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
         {
-            Invoke("MovingHit", TimeUntilHit);
+            Invoke("Hit", TimeUntilHit);
         }
         else if(!StandstillAttack || !Attack)
         {
@@ -90,7 +91,7 @@ public class EnemyScript : MonoBehaviour
         if(onFire == true)
         {
             enemyHealth -= 0.1f;
-            //Debug.Log(enemyHealth);
+            Debug.Log(enemyHealth);
         }
     }
     void Die()
@@ -103,8 +104,8 @@ public class EnemyScript : MonoBehaviour
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
     {
-        //This function will apply element, we will probably use our update function ï¿½r timed update do apply effects etc.
-        if(isFire == true)
+        //This function will apply element, we will probably use our update function är timed update do apply effects etc.
+        if (isFire == true)
         {
             Debug.Log("Fire works");
             onFire = true;
@@ -135,9 +136,9 @@ public class EnemyScript : MonoBehaviour
             newLightning.AssignTarget(transform, closestTarget.transform);
 
             //calla function i enemyscript av closest target.
-
-
-
+            var nextEnemy = closestTarget.gameObject.GetComponent<EnemyScript>();
+            nextEnemy.TakeDamage(chainDamage);
+            nextEnemy.ChainLightning(lightningJumps);
 
         }
         else
@@ -145,7 +146,8 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("No other enemy found");
         }
     }
-    GameObject FindClosestTarget() 
+
+    GameObject FindClosestTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -177,17 +179,11 @@ public class EnemyScript : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    void StandstillHit()
+    void Hit()
     {
         anim.SetBool("Attack", true);
         Attack = true;
         Invoke("CancelAttack", recoil);
-    }
-
-    void MovingHit()
-    {
-        anim.SetBool("Attack", true);
-        Attack = true;
     }
 
     void CancelAttack()
