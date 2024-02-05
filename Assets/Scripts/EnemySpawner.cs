@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        //Debug.Log(player.transform.position);
+        Debug.Log(player.transform.position);
     }
 
     // Update is called once per frame
@@ -32,8 +32,8 @@ public class EnemySpawner : MonoBehaviour
             GameObject newEnemy = Instantiate(EnemyTest, enemies.transform);
             newEnemy.transform.position = spawnPosition;
 
-            //Debug.Log("spawn");
-            //Debug.Log(player.transform.position);
+            Debug.Log("spawn");
+            Debug.Log(player.transform.position);
 
         }
     }

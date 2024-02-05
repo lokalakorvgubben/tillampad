@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed;
+    public SpriteRenderer sr;
     float verticalInput;
     float horizontalInput;
     void Update()
@@ -12,9 +13,13 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (horizontalInput != 0)
+        if (horizontalInput == -1)
         {
-            transform.localScale = new Vector3(-horizontalInput, transform.localScale.y, transform.localScale.z);
+            sr.flipX = true;
+        }
+        else if(horizontalInput == 1)
+        {
+            sr.flipX = false;
         }
 
         Vector2 moveSpeed = new Vector2(horizontalInput, verticalInput).normalized * Time.deltaTime * playerSpeed;
