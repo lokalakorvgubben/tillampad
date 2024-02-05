@@ -35,6 +35,9 @@ public class EnemyScript : MonoBehaviour
 
     private float chainDamage = 10;
 
+    private float timer = 0;
+    public float graceTimer = 1.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,14 @@ public class EnemyScript : MonoBehaviour
     {
         float step = speed * Time.deltaTime;
         time += Time.deltaTime;
+
+        timer += Time.deltaTime;
+        if (timer > graceTimer)
+        {
+            CancelLightning();
+        }
+
+
 
         //Distance of X and Y
         float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
@@ -178,6 +189,10 @@ public class EnemyScript : MonoBehaviour
     {
         onFire = false;
         transform.GetChild(1).gameObject.SetActive(false);
+    }
+    void CancelLightning()
+    {
+        onLightning = false;
     }
 
     void Hit()
