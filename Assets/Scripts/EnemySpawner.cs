@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(player.transform.position);
     }
 
     // Update is called once per frame
@@ -28,8 +29,12 @@ public class EnemySpawner : MonoBehaviour
             Vector3 spawnPosition = MakeRandomSpawnPos();
 
             spawnPosition += player.transform.position;
-            GameObject newEnemy = Instantiate(EnemyTest);
+            GameObject newEnemy = Instantiate(EnemyTest, enemies.transform);
             newEnemy.transform.position = spawnPosition;
+
+            Debug.Log("spawn");
+            Debug.Log(player.transform.position);
+
         }
     }
     private Vector3 MakeRandomSpawnPos()

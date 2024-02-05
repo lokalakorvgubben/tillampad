@@ -11,12 +11,16 @@ public class EnemyScript : MonoBehaviour
     public float speed = 1;
     public float enemyHealth = 100;
     public GameObject player;
+
     public bool onFire = false;
     private float time;
 
     //Desired Distance for Enemy to Attack
     public float desiredDistanceX = 0;
     public float desiredDistanceY = 0;
+    public bool onLightning = false;
+
+    public float desiredDistance = 0;
     public Animator anim;
 
     //If the enemy will stop moving after attacking
@@ -25,6 +29,10 @@ public class EnemyScript : MonoBehaviour
     public float TimeUntilAttack;
     public float TimeUntilHit;
     public float recoil;
+
+    public GameObject lightning;
+
+    public Transform targets;
 
 
     // Start is called before the first frame update
@@ -82,7 +90,7 @@ public class EnemyScript : MonoBehaviour
         if(onFire == true)
         {
             enemyHealth -= 0.1f;
-            Debug.Log(enemyHealth);
+            //Debug.Log(enemyHealth);
         }
     }
     void Die()
@@ -93,16 +101,74 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= damage;
     }
-    public void ApplyElement(bool isFire)
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
     {
-        //This function will apply element, we will probably use our update function är timed update do apply effects etc.
+        //This function will apply element, we will probably use our update function ï¿½r timed update do apply effects etc.
         if(isFire == true)
         {
-            Debug.Log("DET FUNKAAAAAAAAAAAAAAAAR");
+            Debug.Log("Fire works");
             onFire = true;
             transform.GetChild(1).gameObject.SetActive(true);
             Invoke("CancelFire", 4);
         }
+        if (isLightning == true)
+        {
+            Debug.Log("Lightning Wors");
+            onLightning = true;
+            ChainLightning(lightningJumps);
+            //Invoke("CancelFire", 4);
+        }
+    }
+    void ChainLightning(int lightningJumps)
+    {
+        GameObject closestTarget = FindClosestTarget();
+        Debug.Log(lightningJumps);
+        if (closestTarget != null && lightningJumps > 0)
+        {
+            lightningJumps--;
+            Debug.Log(lightningJumps);
+            Debug.Log("Closest target position: " + closestTarget.transform.position);
+
+            GameObject newLightningObject = Instantiate(lightning);
+            LineController2 newLightning = newLightningObject.GetComponent<LineController2>();
+
+            newLightning.AssignTarget(transform, closestTarget.transform);
+
+            //calla function i enemyscript av closest target.
+
+
+
+
+        }
+        else
+        {
+            Debug.Log("No other enemy found");
+        }
+    }
+    GameObject FindClosestTarget() 
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject target in targets)
+        {
+            if (target == this.gameObject)
+            {
+                continue;
+            }
+
+            Vector3 diff = target.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+
+            if (curDistance < distance)
+            {
+                closest = target;
+                distance = curDistance;
+            }
+        }
+        return closest;
     }
 
     void CancelFire()
