@@ -40,6 +40,9 @@ public class EnemyScript : MonoBehaviour
     private float timer = 0;
     public float graceTimer = 1.5f;
 
+    //this var is used to flip character
+    private float positionToPlayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +62,11 @@ public class EnemyScript : MonoBehaviour
         {
             speedMult = 1f;
         }
+        //invert playermodel dependant on position to player
+        player.transform.position.x
+
+
+
 
 
 
