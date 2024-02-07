@@ -102,8 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 5
   damage: 10
-  isFire: 1
+  isFire: 0
   isLightning: 0
+  isWind: 1
   lightningJumps: 0
 --- !u!50 &1820519719569274204
 Rigidbody2D:
