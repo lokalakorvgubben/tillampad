@@ -32,7 +32,7 @@ public class SimpleBulletScript : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.right * Time.deltaTime * bulletSpeed);
-        Debug.Log(damage);
+        //Debug.Log(damage);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,7 +45,7 @@ public class SimpleBulletScript : MonoBehaviour
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             enemy.TakeDamage(damage);
             enemy.ApplyElement(isFire, isLightning, lightningJumps);
-            Destroy(gameObject);
+            Invoke("KillProjectile", 0.1f);
         }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;
     }

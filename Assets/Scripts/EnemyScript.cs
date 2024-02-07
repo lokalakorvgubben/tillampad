@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour
 {
 
     public float speed = 1;
+    public float onLightningSpeedMult = 1;
+    private float speedMult;
     public float enemyHealth = 100;
     public GameObject player;
     public bool onFire = false;
@@ -49,16 +51,26 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float step = speed * Time.deltaTime;
+        if(onLightning == true)
+        {
+            speedMult = onLightningSpeedMult;
+        }
+        else
+        {
+            speedMult = 1f;
+        }
+
+
+
+        float step = speed * speedMult * Time.deltaTime;
         time += Time.deltaTime;
 
         timer += Time.deltaTime;
         if (timer > graceTimer)
         {
             CancelLightning();
+            timer = 0;
         }
-
-
 
         //Distance of X and Y
         float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
@@ -80,7 +92,7 @@ public class EnemyScript : MonoBehaviour
         }
         else if (Attack && StandstillAttack)
         {
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
         }
         else
         {
@@ -102,7 +114,7 @@ public class EnemyScript : MonoBehaviour
         if(onFire == true)
         {
             enemyHealth -= 0.1f;
-            Debug.Log(enemyHealth);
+            //Debug.Log(enemyHealth);
         }
     }
     void Die()
@@ -127,6 +139,7 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("Lightning Wors");
             onLightning = true;
+            Debug.Log("lightningon");
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
@@ -135,12 +148,12 @@ public class EnemyScript : MonoBehaviour
     {
         onLightning = true;
         GameObject closestTarget = FindClosestTarget();
-        Debug.Log(lightningJumps);
+        //Debug.Log(lightningJumps);
         if (closestTarget != null && lightningJumps > 0)
         {
             lightningJumps--;
-            Debug.Log(lightningJumps);
-            Debug.Log("Closest target position: " + closestTarget.transform.position);
+            //Debug.Log(lightningJumps);
+            //Debug.Log("Closest target position: " + closestTarget.transform.position);
 
             GameObject newLightningObject = Instantiate(lightning);
             LineController2 newLightning = newLightningObject.GetComponent<LineController2>();
@@ -155,7 +168,7 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("No other enemy found");
+            //Debug.Log("No other enemy found");
         }
     }
 
