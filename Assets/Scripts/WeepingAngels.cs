@@ -15,20 +15,6 @@ public class WeepingAngel : MonoBehaviour
     public bool onLightning = false;
     private float time;
 
-    //Desired Distance for Enemy to Attack
-    public float desiredDistanceX = 0;
-    public float desiredDistanceY = 0;
-    public Animator anim;
-
-    //If the enemy will stop moving after attacking
-    public bool StandstillAttack = false;
-    public bool Attack = false;
-    public float TimeUntilAttack;
-    public float TimeUntilHit;
-
-    //Time between attacks
-    public float recoil;
-
     public GameObject lightning;
 
     public Transform targets;
@@ -37,13 +23,14 @@ public class WeepingAngel : MonoBehaviour
 
     private float timer = 0;
     public float graceTimer = 1.5f;
+    private FieldOfView FOV;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        time = TimeUntilAttack;
+        FOV = player.GetComponent<FieldOfView>();
     }
 
     // Update is called once per frame
@@ -59,7 +46,10 @@ public class WeepingAngel : MonoBehaviour
         }
         Vector2 LocationToMove = new Vector2(player.transform.position.y, player.transform.position.x);
 
-
+        if(FOV.CanSeeEnemy == false)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+        }
 
         if (enemyHealth <= 0)
         {
@@ -163,19 +153,5 @@ public class WeepingAngel : MonoBehaviour
     void CancelLightning()
     {
         onLightning = false;
-    }
-
-    void Hit()
-    {
-        anim.SetBool("Attack", true);
-        Attack = true;
-        Invoke("CancelAttack", recoil);
-    }
-
-    void CancelAttack()
-    {
-        Attack = false;
-        anim.SetBool("Attack", false);
-        time = 0;
     }
 }

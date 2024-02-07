@@ -14,6 +14,7 @@ public class ArmScript : MonoBehaviour
     public float spread;
     public int bulletsToShoot = 1;
     public float GunDamage;
+    public float angle;
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +28,20 @@ public class ArmScript : MonoBehaviour
         Vector3 mouse_pos;
         Vector3 object_pos;
 
-        float angle;
         mouse_pos = Input.mousePosition;
         object_pos = Camera.main.WorldToScreenPoint(transform.position);
         ShootTime += Time.deltaTime;
 
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
+        angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         
 
         if(ShootTime > TimeToShoot)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && isLeftArm)
             {
-                mouse_pos.x = mouse_pos.x - object_pos.x;
-                mouse_pos.y = mouse_pos.y - object_pos.y;
-                angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
@@ -53,10 +53,7 @@ public class ArmScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
             {
-                mouse_pos.x = mouse_pos.x - object_pos.x;
-                mouse_pos.y = mouse_pos.y - object_pos.y;
-                angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
