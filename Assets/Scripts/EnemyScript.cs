@@ -63,8 +63,8 @@ public class EnemyScript : MonoBehaviour
             speedMult = 1f;
         }
         //invert playermodel dependant on position to player
-        //player.transform.position.x;
-
+        positionToPlayer = transform.position.x - player.transform.position.x;
+        Debug.Log(positionToPlayer);
 
 
 

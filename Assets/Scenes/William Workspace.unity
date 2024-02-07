@@ -197,6 +197,18 @@ PrefabInstance:
       value: windsphere
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 14.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 14.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -235,6 +247,10 @@ PrefabInstance:
     - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7878350319992209165, guid: a9a516644d805a54cbfa5315c7c76256, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6471,6 +6487,7 @@ MonoBehaviour:
   spread: 30
   bulletsToShoot: 1
   GunDamage: 10
+  angle: 0
 --- !u!212 &1752347855 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: 8630ab5d9847280409925ed58e32ebe0, type: 3}
@@ -6622,6 +6639,7 @@ MonoBehaviour:
   spread: 30
   bulletsToShoot: 1
   GunDamage: 10
+  angle: 0
 --- !u!1 &245344794918326816
 GameObject:
   m_ObjectHideFlags: 0
