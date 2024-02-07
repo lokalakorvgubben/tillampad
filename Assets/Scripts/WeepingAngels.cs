@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class EnemyScript : MonoBehaviour
+public class WeepingAngel : MonoBehaviour
 {
 
     public float speed = 1;
@@ -57,41 +57,11 @@ public class EnemyScript : MonoBehaviour
         {
             CancelLightning();
         }
+        Vector2 LocationToMove = new Vector2(player.transform.position.y, player.transform.position.x);
 
 
 
-        //Distance of X and Y
-        float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
-        float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
-
-        Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
-
-        if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
-        {
-            Invoke("Hit", TimeUntilHit);
-        }
-        else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
-        {
-            Invoke("Hit", TimeUntilHit);
-        }
-        else if(!StandstillAttack || !Attack)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-        }
-        else if (Attack && StandstillAttack)
-        {
-            Debug.Log("Attack");
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-            anim.SetBool("Attack", true);
-            Attack = true;
-            Invoke("CancelAttack", recoil);
-        }
-
-
-        if(enemyHealth <= 0)
+        if (enemyHealth <= 0)
         {
             Die();
         }
@@ -99,7 +69,7 @@ public class EnemyScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(onFire == true)
+        if (onFire == true)
         {
             enemyHealth -= 0.1f;
             Debug.Log(enemyHealth);
@@ -131,7 +101,7 @@ public class EnemyScript : MonoBehaviour
             //Invoke("CancelFire", 4);
         }
     }
-    public void ChainLightning(int lightningJumps)
+    void ChainLightning(int lightningJumps)
     {
         onLightning = true;
         GameObject closestTarget = FindClosestTarget();
