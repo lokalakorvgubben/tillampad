@@ -146,16 +146,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  onLightningSpeedMult: 0.3
   enemyHealth: 100
   player: {fileID: 0}
   onFire: 0
   onLightning: 0
-  desiredDistance: 0
+  desiredDistanceX: 0
+  desiredDistanceY: 0
   anim: {fileID: 0}
   StandstillAttack: 0
+  Attack: 0
+  TimeUntilAttack: 0
+  TimeUntilHit: 0
   recoil: 0
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   targets: {fileID: 0}
+  graceTimer: 2
 --- !u!1 &2580256570479286414
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class LineController2 : MonoBehaviour
     private Transform target;
     private Transform startEnemy;
 
-    private float timer = 0;
+    public float timer = 0;
     public float dieTimer = 1;
 
     private void Awake()
