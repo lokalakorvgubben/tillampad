@@ -45,6 +45,7 @@ public class SimpleBulletScript : MonoBehaviour
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             enemy.TakeDamage(damage);
             enemy.ApplyElement(isFire, isLightning, lightningJumps);
+            Destroy(gameObject);
         }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;
     }

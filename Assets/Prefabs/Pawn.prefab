@@ -33,8 +33,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 347693340081358891}
   - {fileID: 7888337380948591083}
+  - {fileID: 347693340081358891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &945953374041603412
@@ -182,6 +182,9 @@ MonoBehaviour:
   recoil: 4
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   targets: {fileID: 0}
+  graceTimer: 1.5
+  DamageParticle: {fileID: 0}
+  DamageNumber: {fileID: 0}
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0

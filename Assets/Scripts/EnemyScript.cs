@@ -38,6 +38,10 @@ public class EnemyScript : MonoBehaviour
     private float timer = 0;
     public float graceTimer = 1.5f;
 
+    public GameObject DamageParticle;
+
+    public TextMeshProUGUI DamageNumber;
+
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +116,8 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;
+        DamageNumber.text = damage.ToString();
+        DamageParticle.SetActive(true);
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
     {
