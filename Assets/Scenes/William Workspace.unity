@@ -6353,7 +6353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b96cc73a5f0604abf127cd0a53f520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 1
+  maxEnemies: 50
   enemyVariants: []
   spawnInterval: 1
   nextTimeToSpawn: 0

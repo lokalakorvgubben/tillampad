@@ -15,6 +15,7 @@ public class SimpleBulletScript : MonoBehaviour
 
     public bool isFire = false;
     public bool isLightning = false;
+    public bool isWind = false;
     public int lightningJumps = 0;
 
     void Start()
