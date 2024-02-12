@@ -65,7 +65,12 @@ public class EnemyScript : MonoBehaviour
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
         Debug.Log(positionToPlayer);
-
+        /*
+        if(positionToPlayer > 0)
+        {
+            transform.localScale.x = -1f;
+        }
+        */
 
 
 
