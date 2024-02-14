@@ -63,6 +63,18 @@ public class ArmScript : MonoBehaviour
 
                 ShootTime = 0;
             }
+            if (Input.GetKeyDown(KeyCode.Space) && !isLeftArm)
+            {
+
+                for (int i = 0; i < bulletsToShoot; i++)
+                {
+                    float x = Random.Range(-spread, spread);
+                    Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
+                }
+
+                ShootTime = 0;
+            }
         }
     }
 }
