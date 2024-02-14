@@ -71,7 +71,7 @@ public class EnemyScript : MonoBehaviour
 
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
-        Debug.Log(positionToPlayer);
+        //Debug.Log(positionToPlayer);
         
         if(positionToPlayer > 0)
         {
@@ -148,7 +148,13 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= damage;
     }
-    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
+
+    public void TemporaryThunderDamage()
+    {
+        enemyHealth -= 25;
+        Debug.Log("THUNDER!");
+    }
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind)
     {
         //This function will apply element, we will probably use our update function �r timed update do apply effects etc.
         if (isFire == true)
@@ -166,6 +172,28 @@ public class EnemyScript : MonoBehaviour
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
+        if (isWind == true)
+        {
+            Debug.Log("Wind Works");
+        }
+
+
+        //-----------------------------------//
+        //-We start doing interactions below-//
+        //-----------------------------------//
+        if(onLightning && isWind)
+        {
+            Debug.Log("Insert thunder cloud here");
+            Invoke("TemporaryThunderDamage", 1);
+        }
+
+
+
+
+
+
+
+
     }
     public void ChainLightning(int lightningJumps)
     {

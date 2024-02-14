@@ -6411,7 +6411,7 @@ MonoBehaviour:
   fireBullet: {fileID: 3170466227983379168, guid: 0c3c6424df730d548af20bdc99c39208, type: 3}
   lightningBullet: {fileID: 3170466227983379168, guid: 38b5f2135a76a76459b6baf09b9218c5, type: 3}
   TimeToShoot: 0
-  spread: 30
+  spread: 0
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
@@ -6563,7 +6563,7 @@ MonoBehaviour:
   fireBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
   lightningBullet: {fileID: 3170466227983379168, guid: 38b5f2135a76a76459b6baf09b9218c5, type: 3}
   TimeToShoot: 0
-  spread: 30
+  spread: 0
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
