@@ -185,6 +185,7 @@ MonoBehaviour:
   targets: {fileID: 0}
   graceTimer: 1.5
   SpriteRenderer: {fileID: 0}
+  effects: {fileID: 0}
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,10 +1783,10 @@ ParticleSystem:
     uvChannelMask: -15
     rowMode: 1
     sprites:
-    - sprite: {fileID: 7857011545540280872, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: -7795838927777762900, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: 6772234838714815171, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: -7327070526148863577, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: 5548082036200891700, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: 603849681681816677, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -1044020311269738948, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -818126105158700327, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:

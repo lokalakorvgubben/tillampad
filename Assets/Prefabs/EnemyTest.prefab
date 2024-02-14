@@ -111,6 +111,7 @@ MonoBehaviour:
   targets: {fileID: 0}
   graceTimer: 2
   SpriteRenderer: {fileID: 4120764400762115954}
+  effects: {fileID: 0}
 --- !u!1 &2580256570479286414
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,8 +234,8 @@ Transform:
   m_GameObject: {fileID: 2632595547731764924}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.27, y: 0.57000005, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.57, y: -0.59, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8696494395060464637}
@@ -1693,10 +1694,10 @@ ParticleSystem:
     uvChannelMask: -15
     rowMode: 1
     sprites:
-    - sprite: {fileID: 7857011545540280872, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: -7795838927777762900, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: 6772234838714815171, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
-    - sprite: {fileID: -7327070526148863577, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: 5548082036200891700, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: 603849681681816677, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -1044020311269738948, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -818126105158700327, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
