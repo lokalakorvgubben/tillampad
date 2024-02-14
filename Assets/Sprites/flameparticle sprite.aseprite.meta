@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43151cc8b56fdb64f9890214dea6aa46
+guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -76,6 +76,7 @@ ScriptedImporter:
     layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -88,6 +89,7 @@ ScriptedImporter:
     layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -95,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638435186900375122
+  platformSettingsDirtyTick: 638435186079652078
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -122,6 +124,7 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_0
     originalName: 
     pivot: {x: 0.5, y: 0.22222222}
+    pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -130,7 +133,7 @@ ScriptedImporter:
       y: 22
       width: 4
       height: 9
-    spriteID: f35746211ff06764ebebc6ab9b92c3cf
+    spriteID: e95b1259a4cbdb346bfa285623ed270e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,6 +145,7 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_1
     originalName: 
     pivot: {x: 0.5, y: 0.22222222}
+    pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -150,7 +154,7 @@ ScriptedImporter:
       y: 39
       width: 4
       height: 9
-    spriteID: 9e5e4eea29097cb468b80ba7700cdb44
+    spriteID: b07d04c91a91b6e4ea834d387120426e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -162,6 +166,7 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_2
     originalName: 
     pivot: {x: 0.5, y: 0.2}
+    pivot: {x: 0.5, y: 0.2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -170,7 +175,7 @@ ScriptedImporter:
       y: 4
       width: 4
       height: 10
-    spriteID: a95e5eb8687f5864d82a4634f701c65f
+    spriteID: d94560229047ac645a8d48ec3e7f122a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -182,6 +187,7 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_3
     originalName: 
     pivot: {x: 0.5, y: 0.22222222}
+    pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -190,7 +196,7 @@ ScriptedImporter:
       y: 4
       width: 4
       height: 9
-    spriteID: 33c64d2772a7a224d84712112ce3bd16
+    spriteID: aca4440a43deeb6408da855f3fac2652
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -215,7 +221,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: f35746211ff06764ebebc6ab9b92c3cf
+      spriteId: e95b1259a4cbdb346bfa285623ed270e
     - name: flameparticle sprite_Frame_1
       frameIndex: 1
       cellRect:
@@ -223,7 +229,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: 9e5e4eea29097cb468b80ba7700cdb44
+      spriteId: b07d04c91a91b6e4ea834d387120426e
     - name: flameparticle sprite_Frame_2
       frameIndex: 2
       cellRect:
@@ -231,7 +237,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 10
-      spriteId: a95e5eb8687f5864d82a4634f701c65f
+      spriteId: d94560229047ac645a8d48ec3e7f122a
     - name: flameparticle sprite_Frame_3
       frameIndex: 3
       cellRect:
@@ -239,7 +245,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: 33c64d2772a7a224d84712112ce3bd16
+      spriteId: aca4440a43deeb6408da855f3fac2652
     linkedCells: []
     parentIndex: -1
   platformSettings:

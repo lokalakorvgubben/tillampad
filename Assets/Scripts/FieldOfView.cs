@@ -9,7 +9,7 @@ public class FieldOfView : MonoBehaviour
     public float radius = 5f;
     public LayerMask targetLayer;
 
-    public GameObject Enemy;
+    public WeepingAngel Enemy;
     public bool CanSeeEnemy {  get; private set; }
 
     private void Start()
@@ -19,7 +19,6 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        Enemy = GameObject.FindGameObjectWithTag("Enemy");
         if(Enemy == null)
         {
             Debug.Log("No Enemies");
@@ -52,15 +51,35 @@ public class FieldOfView : MonoBehaviour
 
         if (hit.collider != null)
         {
-            CanSeeEnemy = true;
-            Enemy = hit.collider.gameObject;
+            // Calculate the direction to the enemy
+            Vector2 directionToEnemy = (hit.transform.position - transform.position).normalized;
+
+            // Check if the enemy is within the FOV range (angle) and within the specified radius
+            float angleToEnemy = Vector2.Angle(transform.up, directionToEnemy);
+            float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+            if (angleToEnemy < 360 / 2 && distanceToEnemy <= radius)
+            {
+                CanSeeEnemy = true;
+                Enemy = hit.collider.gameObject.GetComponent<WeepingAngel>();
+                Enemy.InSight = true;
+            }
+            else
+            {
+                CanSeeEnemy = false;
+                Enemy = null;
+                Enemy.InSight = false;
+            }
         }
         else
         {
             CanSeeEnemy = false;
             Enemy = null;
+            Enemy.InSight = false;
         }
     }
+
+
 
     private void OnDrawGizmos()
     {

@@ -23,14 +23,13 @@ public class WeepingAngel : MonoBehaviour
 
     private float timer = 0;
     public float graceTimer = 1.5f;
-    private FieldOfView FOV;
+    public bool InSight;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        FOV = player.GetComponent<FieldOfView>();
     }
 
     // Update is called once per frame
@@ -44,11 +43,10 @@ public class WeepingAngel : MonoBehaviour
         {
             CancelLightning();
         }
-        Vector2 LocationToMove = new Vector2(player.transform.position.y, player.transform.position.x);
 
-        if(FOV.CanSeeEnemy == false)
+        if(InSight == false)
         {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         }
 
         if (enemyHealth <= 0)
