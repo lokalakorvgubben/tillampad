@@ -15,10 +15,12 @@ public class ArmScript : MonoBehaviour
     public int bulletsToShoot = 1;
     public float GunDamage;
     public float angle;
+    private GameObject bullets;
 
     // Start is called before the first frame update
     void Start()
     {
+        bullets = GameObject.Find("Bullets");
         ShootTime = TimeToShoot;
     }
 
@@ -45,7 +47,7 @@ public class ArmScript : MonoBehaviour
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                    Instantiate(fireBullet, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                         .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 
@@ -57,7 +59,7 @@ public class ArmScript : MonoBehaviour
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                    Instantiate(lightningBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                         .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 
@@ -69,7 +71,7 @@ public class ArmScript : MonoBehaviour
                 for (int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)))
+                    Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                         .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 

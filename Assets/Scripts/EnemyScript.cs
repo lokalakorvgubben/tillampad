@@ -44,12 +44,14 @@ public class EnemyScript : MonoBehaviour
     private float positionToPlayer;
     public SpriteRenderer SpriteRenderer;
 
+    public GameObject effects;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
     }
 
@@ -154,7 +156,7 @@ public class EnemyScript : MonoBehaviour
         enemyHealth -= 25;
         Debug.Log("THUNDER!");
     }
-    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind)
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
         //This function will apply element, we will probably use our update function �r timed update do apply effects etc.
         if (isFire == true)
@@ -186,6 +188,12 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("Insert thunder cloud here");
             Invoke("TemporaryThunderDamage", 1);
         }
+        
+        if(onFire && isWind)
+        {
+            Debug.Log("spawn flare");
+            Debug.Log(zRotation);
+        }
 
 
 
@@ -206,7 +214,7 @@ public class EnemyScript : MonoBehaviour
             //Debug.Log(lightningJumps);
             //Debug.Log("Closest target position: " + closestTarget.transform.position);
 
-            GameObject newLightningObject = Instantiate(lightning);
+            GameObject newLightningObject = Instantiate(lightning, effects.transform);
             LineController2 newLightning = newLightningObject.GetComponent<LineController2>();
 
             newLightning.AssignTarget(transform, closestTarget.transform);
