@@ -76,7 +76,6 @@ ScriptedImporter:
     layerImportMode: 1
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
-    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -88,7 +87,6 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
@@ -124,7 +122,6 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_0
     originalName: 
     pivot: {x: 0.5, y: 0.22222222}
-    pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -144,7 +141,6 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 22}
   - name: flameparticle sprite_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0.22222222}
     pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,7 +162,6 @@ ScriptedImporter:
   - name: flameparticle sprite_Frame_2
     originalName: 
     pivot: {x: 0.5, y: 0.2}
-    pivot: {x: 0.5, y: 0.2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -186,7 +181,6 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: flameparticle sprite_Frame_3
     originalName: 
-    pivot: {x: 0.5, y: 0.22222222}
     pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}

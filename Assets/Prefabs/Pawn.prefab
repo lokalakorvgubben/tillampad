@@ -184,8 +184,8 @@ MonoBehaviour:
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   targets: {fileID: 0}
   graceTimer: 1.5
-  SpriteRenderer: {fileID: 0}
-  effects: {fileID: 0}
+  SpriteRenderer: {fileID: 945953374041603412}
+  effects: {fileID: 8743402047897712307}
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0

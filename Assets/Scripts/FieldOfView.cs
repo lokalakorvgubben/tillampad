@@ -1,38 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class FieldOfView : MonoBehaviour
 {
     public ArmScript armScript;
-    public float radius = 5f;
+
+    [Header("Field of View Settings")]
+    public float baseRadius = 5f; // Default radius
+    public float radius { get; private set; } // Actual radius
+
     public LayerMask targetLayer;
 
-    public WeepingAngel Enemy;
-    public bool CanSeeEnemy {  get; private set; }
+    public List<WeepingAngel> DetectedEnemies { get; private set; } = new List<WeepingAngel>();
+    public bool CanSeeEnemy { get { return DetectedEnemies.Count > 0; } }
 
     private void Start()
     {
-        StartCoroutine(FOVCheck());
+        radius = baseRadius; // Initialize radius
     }
 
     private void Update()
     {
-        if(Enemy == null)
+        if (DetectedEnemies.Count == 0)
         {
             Debug.Log("No Enemies");
         }
-    }
-
-    private IEnumerator FOVCheck()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
-        while (true)
-        {
-            yield return wait;
-            FOV();
-        }
+        FOV();
     }
 
     private void FOV()
@@ -44,12 +38,21 @@ public class FieldOfView : MonoBehaviour
         float angleToMouse = Mathf.Atan2(mouseDirection.y, mouseDirection.x) * Mathf.Rad2Deg;
 
         // Adjust the FOV based on the angle to the mouse
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleToMouse));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angleToMouse + 90));
 
-        // Perform the raycast as before to determine if an enemy is within the FOV
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, mouseDirection, radius, targetLayer);
+        // Perform the raycast using the targetLayer
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, mouseDirection, radius, targetLayer);
 
-        if (hit.collider != null)
+        // Reset InSight to false for all enemies before checking the raycast hits
+        foreach (WeepingAngel enemy in DetectedEnemies)
+        {
+            enemy.InSight = false;
+        }
+
+        // Clear the list of detected enemies
+        DetectedEnemies.Clear();
+
+        foreach (RaycastHit2D hit in hits)
         {
             // Calculate the direction to the enemy
             Vector2 directionToEnemy = (hit.transform.position - transform.position).normalized;
@@ -60,31 +63,20 @@ public class FieldOfView : MonoBehaviour
 
             if (angleToEnemy < 360 / 2 && distanceToEnemy <= radius)
             {
-                CanSeeEnemy = true;
-                Enemy = hit.collider.gameObject.GetComponent<WeepingAngel>();
-                Enemy.InSight = true;
+                WeepingAngel enemy = hit.collider.gameObject.GetComponent<WeepingAngel>();
+                if (enemy != null)
+                {
+                    enemy.InSight = true;
+                    DetectedEnemies.Add(enemy);
+                }
             }
-            else
-            {
-                CanSeeEnemy = false;
-                Enemy = null;
-                Enemy.InSight = false;
-            }
-        }
-        else
-        {
-            CanSeeEnemy = false;
-            Enemy = null;
-            Enemy.InSight = false;
         }
     }
-
-
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
 
         Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, -360 / 2);
         Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, 360 / 2);
@@ -99,16 +91,17 @@ public class FieldOfView : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
         Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 
-        if (CanSeeEnemy)
+        // Draw lines to detected enemies
+        Gizmos.color = Color.green;
+        foreach (WeepingAngel enemy in DetectedEnemies)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, Enemy.transform.position);
+            Gizmos.DrawLine(transform.position, enemy.transform.position);
         }
     }
 
     private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
     {
         angleInDegrees += eulerY;
-        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        return new Vector2(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }
 }

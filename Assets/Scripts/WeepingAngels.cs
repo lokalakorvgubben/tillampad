@@ -44,7 +44,7 @@ public class WeepingAngel : MonoBehaviour
             CancelLightning();
         }
 
-        if(InSight == false)
+        if(!InSight)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         }
