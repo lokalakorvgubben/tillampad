@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8696494395060464637}
-  - component: {fileID: 1736536821298713524}
   - component: {fileID: 3283258288846611080}
   - component: {fileID: 9195599691710710151}
   m_Layer: 0
@@ -37,58 +36,6 @@ Transform:
   - {fileID: 7363109977705887899}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1736536821298713524
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667431548381410085}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 8187269268233104622, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 1
-  m_Size: {x: 0.8, y: 1.51}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!61 &3283258288846611080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -163,6 +110,7 @@ MonoBehaviour:
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   targets: {fileID: 0}
   graceTimer: 2
+  SpriteRenderer: {fileID: 4120764400762115954}
 --- !u!1 &2580256570479286414
 GameObject:
   m_ObjectHideFlags: 0
@@ -5098,6 +5046,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonWalking
       objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
       propertyPath: m_LocalScale.x
       value: 8.5
@@ -5159,6 +5115,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
+--- !u!212 &4120764400762115954 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}
+  m_PrefabInstance: {fileID: 827114616490510230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7363109977705887899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: 1381bf77539eff0469017ac34ceb3c5c, type: 3}

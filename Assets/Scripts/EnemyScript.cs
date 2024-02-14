@@ -40,8 +40,10 @@ public class EnemyScript : MonoBehaviour
     private float timer = 0;
     public float graceTimer = 1.5f;
 
-    //this var is used to flip character
+    //used to flip character
     private float positionToPlayer;
+    public SpriteRenderer SpriteRenderer;
+
 
 
     // Start is called before the first frame update
@@ -62,15 +64,23 @@ public class EnemyScript : MonoBehaviour
         {
             speedMult = 1f;
         }
+
+
+
+
+
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
         Debug.Log(positionToPlayer);
-        /*
+        
         if(positionToPlayer > 0)
         {
-            transform.localScale.x = -1f;
+            SpriteRenderer.flipX = true;
         }
-        */
+        else if(positionToPlayer < 0){
+            SpriteRenderer.flipX = false;
+        }
+        
 
 
 
@@ -140,7 +150,7 @@ public class EnemyScript : MonoBehaviour
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
     {
-        //This function will apply element, we will probably use our update function är timed update do apply effects etc.
+        //This function will apply element, we will probably use our update function ï¿½r timed update do apply effects etc.
         if (isFire == true)
         {
             Debug.Log("Fire works");
