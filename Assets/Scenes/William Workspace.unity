@@ -6554,7 +6554,7 @@ MonoBehaviour:
   enemyVariants:
   - enemyPrefab: {fileID: 667431548381410085, guid: f73c203efba10f74eaef05e3b85b2b32, type: 3}
     spawnWeight: 10
-  spawnInterval: 1
+  spawnInterval: 0.2
   nextTimeToSpawn: 0
   EnemyTest: {fileID: 667431548381410085, guid: f73c203efba10f74eaef05e3b85b2b32, type: 3}
   enemies: {fileID: 1932338425}
