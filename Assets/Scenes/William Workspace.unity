@@ -6706,6 +6706,7 @@ MonoBehaviour:
   lightning: {fileID: 0}
   targets: {fileID: 0}
   graceTimer: 1.5
+  SpriteRenderer: {fileID: 0}
 --- !u!61 &8342273196364105858
 BoxCollider2D:
   m_ObjectHideFlags: 0
