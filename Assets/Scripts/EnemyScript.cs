@@ -44,12 +44,14 @@ public class EnemyScript : MonoBehaviour
     private float positionToPlayer;
     public SpriteRenderer SpriteRenderer;
 
+    public GameObject effects;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
     }
 
@@ -71,7 +73,7 @@ public class EnemyScript : MonoBehaviour
 
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
-        Debug.Log(positionToPlayer);
+        //Debug.Log(positionToPlayer);
         
         if(positionToPlayer > 0)
         {
@@ -148,7 +150,13 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= damage;
     }
-    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
+
+    public void TemporaryThunderDamage()
+    {
+        enemyHealth -= 25;
+        Debug.Log("THUNDER!");
+    }
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
         //This function will apply element, we will probably use our update function �r timed update do apply effects etc.
         if (isFire == true)
@@ -166,6 +174,34 @@ public class EnemyScript : MonoBehaviour
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
+        if (isWind == true)
+        {
+            Debug.Log("Wind Works");
+        }
+
+
+        //-----------------------------------//
+        //-We start doing interactions below-//
+        //-----------------------------------//
+        if(onLightning && isWind)
+        {
+            Debug.Log("Insert thunder cloud here");
+            Invoke("TemporaryThunderDamage", 1);
+        }
+        
+        if(onFire && isWind)
+        {
+            Debug.Log("spawn flare");
+            Debug.Log(zRotation);
+        }
+
+
+
+
+
+
+
+
     }
     public void ChainLightning(int lightningJumps)
     {
@@ -178,7 +214,7 @@ public class EnemyScript : MonoBehaviour
             //Debug.Log(lightningJumps);
             //Debug.Log("Closest target position: " + closestTarget.transform.position);
 
-            GameObject newLightningObject = Instantiate(lightning);
+            GameObject newLightningObject = Instantiate(lightning, effects.transform);
             LineController2 newLightning = newLightningObject.GetComponent<LineController2>();
 
             newLightning.AssignTarget(transform, closestTarget.transform);

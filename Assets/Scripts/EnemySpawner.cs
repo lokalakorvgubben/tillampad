@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (randomSpawnPoint != null && randomEnemyVariant != null)
         {
-            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint));
+            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint), enemies.transform);
             spawnedEnemies.Add(newEnemy);
         }
     }

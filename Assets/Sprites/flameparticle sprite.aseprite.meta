@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638435174547816926
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 22
       width: 4
       height: 9
-    spriteID: b33b269d59c808141bbcb95773ab2d69
+    spriteID: e95b1259a4cbdb346bfa285623ed270e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 39
       width: 4
       height: 9
-    spriteID: ff2d733b957d2f549b95794d04d56c7b
+    spriteID: b07d04c91a91b6e4ea834d387120426e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 4
       width: 4
       height: 10
-    spriteID: 2a2de7c38620b0e42bcbc709db2581b2
+    spriteID: d94560229047ac645a8d48ec3e7f122a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 4
       width: 4
       height: 9
-    spriteID: 94627d2064c4d4f4d997adebf891f774
+    spriteID: aca4440a43deeb6408da855f3fac2652
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -215,7 +215,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: b33b269d59c808141bbcb95773ab2d69
+      spriteId: e95b1259a4cbdb346bfa285623ed270e
     - name: flameparticle sprite_Frame_1
       frameIndex: 1
       cellRect:
@@ -223,7 +223,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: ff2d733b957d2f549b95794d04d56c7b
+      spriteId: b07d04c91a91b6e4ea834d387120426e
     - name: flameparticle sprite_Frame_2
       frameIndex: 2
       cellRect:
@@ -231,7 +231,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 10
-      spriteId: 2a2de7c38620b0e42bcbc709db2581b2
+      spriteId: d94560229047ac645a8d48ec3e7f122a
     - name: flameparticle sprite_Frame_3
       frameIndex: 3
       cellRect:
@@ -239,7 +239,7 @@ ScriptedImporter:
         y: 14
         width: 4
         height: 9
-      spriteId: 94627d2064c4d4f4d997adebf891f774
+      spriteId: aca4440a43deeb6408da855f3fac2652
     linkedCells: []
     parentIndex: -1
   platformSettings: []
