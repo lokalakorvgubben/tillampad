@@ -43,8 +43,16 @@ public class LineController2 : MonoBehaviour
         {
             lineRenderer.SetPosition(1, target.position);
         }
+        else 
+        {
+            Die();
+        }
         if(startEnemy != null) {
             lineRenderer.SetPosition(0, startEnemy.position);
+        }
+        else
+        {
+            Die();
         }
         
 
