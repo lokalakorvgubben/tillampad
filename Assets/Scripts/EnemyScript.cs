@@ -44,7 +44,9 @@ public class EnemyScript : MonoBehaviour
     private float positionToPlayer;
     public SpriteRenderer SpriteRenderer;
 
+    //spawns electricity and similar stuff under this transform
     public GameObject effects;
+    public GameObject Flare;
 
 
     // Start is called before the first frame update
@@ -163,7 +165,7 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("Fire works");
             onFire = true;
-            transform.GetChild(1).gameObject.SetActive(true);
+            transform.Find("Fire").gameObject.SetActive(true);
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
@@ -260,7 +262,7 @@ public class EnemyScript : MonoBehaviour
     void CancelFire()
     {
         onFire = false;
-        transform.GetChild(1).gameObject.SetActive(false);
+        transform.Find("Fire").gameObject.SetActive(false);
     }
     void CancelLightning()
     {
