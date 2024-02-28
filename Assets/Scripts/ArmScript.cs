@@ -16,6 +16,10 @@ public class ArmScript : MonoBehaviour
     public float GunDamage;
     public float angle;
     private GameObject bullets;
+    private bool Leftshooting;
+    private bool Rightshooting;
+    public bool allowLeftButtonHold;
+    public bool allowRightButtonHold;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,12 @@ public class ArmScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (allowLeftButtonHold) Leftshooting = Input.GetKey(KeyCode.Mouse0);
+        else Leftshooting = Input.GetKeyDown(KeyCode.Mouse0);
+
+        if(allowRightButtonHold) Rightshooting = Input.GetKey(KeyCode.Mouse1);
+        else Rightshooting = Input.GetKeyDown(KeyCode.Mouse1);
+
         Vector3 mouse_pos;
         Vector3 object_pos;
 
@@ -42,7 +52,7 @@ public class ArmScript : MonoBehaviour
 
         if(ShootTime > TimeToShoot)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && isLeftArm)
+            if (Leftshooting && isLeftArm)
             {
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
@@ -53,7 +63,7 @@ public class ArmScript : MonoBehaviour
 
                 ShootTime = 0;
             }
-            if (Input.GetKeyDown(KeyCode.Mouse1) && !isLeftArm)
+            if (Rightshooting && !isLeftArm)
             {
 
                 for(int i = 0; i < bulletsToShoot; i++)
