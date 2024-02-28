@@ -11,6 +11,7 @@ public class SimpleBulletScript : MonoBehaviour
     private float zRotation;
     private PlayerMovement PlayerMovement;
     private EnemyScript EnemyScript;
+    private WeepingAngels WeepingAngels;
     //public bool[] elements;
     //Comment what value = what element
     //elements[0] = fire
@@ -43,6 +44,8 @@ public class SimpleBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("hit");
+        Debug.Log(collision.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //Debug.Log("MEGA MEGA SUCESS");
@@ -55,7 +58,15 @@ public class SimpleBulletScript : MonoBehaviour
             enemy.ApplyElement(isFire, isLightning, lightningJumps, isWind, zRotation);
             isEnabled = false;
             Invoke("KillProjectile", 0.1f);
-
+        }
+        if(collision.gameObject.GetComponent<WeepingAngels>() && isEnabled)
+        {
+            var enemy = collision.gameObject.GetComponent<WeepingAngels>();
+            zRotation = transform.localRotation.eulerAngles.z;
+            enemy.TakeDamage(damage);
+            enemy.ApplyElement(isFire, isLightning, lightningJumps, isWind, zRotation);
+            isEnabled = false;
+            Invoke("KillProjectile", 0.1f);
         }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;
     }

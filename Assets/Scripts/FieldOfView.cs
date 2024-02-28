@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    public ArmScript armScript;
 
     [Header("Field of View Settings")]
     public float baseRadius = 5f; // Default radius
@@ -12,7 +11,7 @@ public class FieldOfView : MonoBehaviour
 
     public LayerMask targetLayer;
 
-    public List<WeepingAngel> DetectedEnemies { get; private set; } = new List<WeepingAngel>();
+    public List<WeepingAngels> DetectedEnemies { get; private set; } = new List<WeepingAngels>();
     public bool CanSeeEnemy { get { return DetectedEnemies.Count > 0; } }
 
     private void Start()
@@ -41,10 +40,10 @@ public class FieldOfView : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angleToMouse + 90));
 
         // Perform the raycast using the targetLayer
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, mouseDirection, radius, targetLayer);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, mouseDirection, 0f, targetLayer);
 
         // Reset InSight to false for all enemies before checking the raycast hits
-        foreach (WeepingAngel enemy in DetectedEnemies)
+        foreach (WeepingAngels enemy in DetectedEnemies)
         {
             enemy.InSight = false;
         }
@@ -58,12 +57,12 @@ public class FieldOfView : MonoBehaviour
             Vector2 directionToEnemy = (hit.transform.position - transform.position).normalized;
 
             // Check if the enemy is within the FOV range (angle) and within the specified radius
-            float angleToEnemy = Vector2.Angle(transform.up, directionToEnemy);
+            float angleToEnemy = Vector2.Angle(mouseDirection, directionToEnemy); // Using mouse direction instead of transform.up
             float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
 
-            if (angleToEnemy < 360 / 2 && distanceToEnemy <= radius)
+            if (angleToEnemy < 60f && distanceToEnemy <= radius) // Adjust the angle for cone-shaped FOV (e.g., 60 degrees)
             {
-                WeepingAngel enemy = hit.collider.gameObject.GetComponent<WeepingAngel>();
+                WeepingAngels enemy = hit.collider.gameObject.GetComponent<WeepingAngels>();
                 if (enemy != null)
                 {
                     enemy.InSight = true;
@@ -79,7 +78,6 @@ public class FieldOfView : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
 
         Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, -360 / 2);
-        Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, 360 / 2);
 
         Gizmos.color = Color.yellow;
 
@@ -89,11 +87,10 @@ public class FieldOfView : MonoBehaviour
 
         // Draw the FOV lines using the predefined angles
         Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
-        Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
 
         // Draw lines to detected enemies
         Gizmos.color = Color.green;
-        foreach (WeepingAngel enemy in DetectedEnemies)
+        foreach (WeepingAngels enemy in DetectedEnemies)
         {
             Gizmos.DrawLine(transform.position, enemy.transform.position);
         }

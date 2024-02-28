@@ -186,6 +186,7 @@ MonoBehaviour:
   graceTimer: 1.5
   SpriteRenderer: {fileID: 945953374041603412}
   effects: {fileID: 8743402047897712307}
+  Flare: {fileID: 0}
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0
