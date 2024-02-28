@@ -93,12 +93,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0618482484e89458b7b9252cc1fdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeepingAngel: 0
   speed: 1
   onLightningSpeedMult: 0.3
   enemyHealth: 100
   player: {fileID: 0}
   onFire: 0
   onLightning: 0
+  InSight: 0
   desiredDistanceX: 0
   desiredDistanceY: 0
   anim: {fileID: 0}
@@ -108,11 +110,12 @@ MonoBehaviour:
   TimeUntilHit: 0
   recoil: 0
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+  flare: {fileID: 0}
   targets: {fileID: 0}
   graceTimer: 2
   SpriteRenderer: {fileID: 4120764400762115954}
   effects: {fileID: 0}
-  Flare: {fileID: 0}
+  Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
 --- !u!1 &2580256570479286414
 GameObject:
   m_ObjectHideFlags: 0

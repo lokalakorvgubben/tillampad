@@ -33,6 +33,7 @@ public class EnemyScript : MonoBehaviour
     public float recoil;
 
     public GameObject lightning;
+    public GameObject flare;
 
     public Transform targets;
 
@@ -209,6 +210,7 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("spawn flare");
             Debug.Log(zRotation);
+            SpawnFlares(zRotation);
         }
 
 
@@ -218,6 +220,11 @@ public class EnemyScript : MonoBehaviour
 
 
 
+    }
+    public void SpawnFlares(float zRotation)
+    {
+        //Instantiate()
+        GameObject newFlareObject = Instantiate(flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, zRotation)), effects.transform);
     }
     public void ChainLightning(int lightningJumps)
     {
