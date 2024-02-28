@@ -35,6 +35,12 @@ public class FlareScript : MonoBehaviour
             Debug.Log(transform.localRotation.eulerAngles.z);
             transform.eulerAngles = new Vector3(0, 0, transform.localRotation.eulerAngles.z - rotationSpeed * Time.deltaTime);
         }
+        
+        if (transform.localRotation.eulerAngles.z > 90f && transform.localRotation.eulerAngles.z < 270f)
+        {
+            Debug.Log(transform.localRotation.eulerAngles.z);
+            transform.eulerAngles = new Vector3(0, 0, transform.localRotation.eulerAngles.z + rotationSpeed * Time.deltaTime);
+        }
 
         /*
         if (transform.localRotation.eulerAngles.z < 90f || transform.localRotation.eulerAngles.z > 270)
