@@ -6531,7 +6531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1664435875
 Transform:
   m_ObjectHideFlags: 0
@@ -6614,6 +6614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b74363aee6fefd48bd3b6a59cd9c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowButtonHold: 0
   gunPoint: {fileID: 976429478}
   isLeftArm: 0
   fireBullet: {fileID: 3170466227983379168, guid: 0c3c6424df730d548af20bdc99c39208, type: 3}
@@ -6623,8 +6624,7 @@ MonoBehaviour:
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
-  allowLeftButtonHold: 0
-  allowRightButtonHold: 0
+  currentBulletType: 0
 --- !u!212 &1752347855 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: 8630ab5d9847280409925ed58e32ebe0, type: 3}
@@ -6775,6 +6775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b74363aee6fefd48bd3b6a59cd9c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowButtonHold: 0
   gunPoint: {fileID: 278102065}
   isLeftArm: 1
   fireBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
@@ -6784,8 +6785,7 @@ MonoBehaviour:
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
-  allowLeftButtonHold: 0
-  allowRightButtonHold: 0
+  currentBulletType: 0
 --- !u!4 &2051304716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8696494395060464637, guid: f73c203efba10f74eaef05e3b85b2b32, type: 3}

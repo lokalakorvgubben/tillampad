@@ -224,7 +224,16 @@ public class EnemyScript : MonoBehaviour
     public void SpawnFlares(float zRotation)
     {
         //Instantiate()
-        GameObject newFlareObject = Instantiate(flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, zRotation)), effects.transform);
+        Debug.Log("FUCKING NUKE");
+
+        GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-40, 40) + zRotation)), effects.transform);
+        }
+        Debug.Log(newFlareObject);
+
+
     }
     public void ChainLightning(int lightningJumps)
     {
