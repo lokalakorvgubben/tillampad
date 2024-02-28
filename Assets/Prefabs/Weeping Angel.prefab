@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 731005958249444101}
   - component: {fileID: 1722705236457926531}
+  - component: {fileID: 1800928750755245285}
   - component: {fileID: 6115380423603744915}
   - component: {fileID: 4141332768264893878}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Weeping Angel
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -34,7 +35,6 @@ Transform:
   m_Children:
   - {fileID: 1396228374465735125}
   - {fileID: 4668178148912423495}
-  - {fileID: 321816474586695761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1722705236457926531
@@ -89,6 +89,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1800928750755245285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240819500803539751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0618482484e89458b7b9252cc1fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeepingAngel: 1
+  speed: 1
+  onLightningSpeedMult: 0.3
+  enemyHealth: 100
+  player: {fileID: 0}
+  onFire: 0
+  onLightning: 0
+  InSight: 0
+  desiredDistanceX: 0
+  desiredDistanceY: 0
+  anim: {fileID: 0}
+  StandstillAttack: 0
+  Attack: 0
+  TimeUntilAttack: 0
+  TimeUntilHit: 0
+  recoil: 0
+  lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+  targets: {fileID: 0}
+  graceTimer: 2
+  SpriteRenderer: {fileID: 1722705236457926531}
+  effects: {fileID: 0}
+  Flare: {fileID: 0}
 --- !u!114 &6115380423603744915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,14 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f9af4105e1f1c47a407c561010ec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  enemyHealth: 100
-  player: {fileID: 0}
-  onFire: 0
-  onLightning: 0
-  lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
-  targets: {fileID: 0}
-  graceTimer: 1.5
   InSight: 0
 --- !u!61 &4141332768264893878
 BoxCollider2D:
@@ -155,101 +181,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!1 &4066001569179110320
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321816474586695761}
-  - component: {fileID: 4040654268464075423}
-  - component: {fileID: 2678841140844739175}
-  m_Layer: 7
-  m_Name: EnemyCollider (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &321816474586695761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066001569179110320}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -1.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 731005958249444101}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &4040654268464075423
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066001569179110320}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!58 &2678841140844739175
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066001569179110320}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.43}
-  serializedVersion: 2
-  m_Radius: 0.25
 --- !u!1 &4728258094895756573
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4668178148912423495}
   - component: {fileID: 3074146484585373477}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: EnemyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +251,7 @@ GameObject:
   - component: {fileID: 1396228374465735125}
   - component: {fileID: 3021958587621863004}
   - component: {fileID: 2154448681827526273}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

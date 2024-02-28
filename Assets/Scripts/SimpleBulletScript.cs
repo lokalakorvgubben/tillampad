@@ -59,15 +59,6 @@ public class SimpleBulletScript : MonoBehaviour
             isEnabled = false;
             Invoke("KillProjectile", 0.1f);
         }
-        if(collision.gameObject.GetComponent<WeepingAngels>() && isEnabled)
-        {
-            var enemy = collision.gameObject.GetComponent<WeepingAngels>();
-            zRotation = transform.localRotation.eulerAngles.z;
-            enemy.TakeDamage(damage);
-            enemy.ApplyElement(isFire, isLightning, lightningJumps, isWind, zRotation);
-            isEnabled = false;
-            Invoke("KillProjectile", 0.1f);
-        }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;
     }
     public void KillProjectile(){

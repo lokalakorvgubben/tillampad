@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
-
+    public bool WeepingAngel;
     public float speed = 1;
     public float onLightningSpeedMult = 1;
     private float speedMult;
@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     public bool onFire = false;
     public bool onLightning = false;
     private float time;
+    public bool InSight;
 
     //Desired Distance for Enemy to Attack
     public float desiredDistanceX = 0;
@@ -72,7 +73,6 @@ public class EnemyScript : MonoBehaviour
 
 
 
-
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
         //Debug.Log(positionToPlayer);
@@ -104,29 +104,38 @@ public class EnemyScript : MonoBehaviour
         float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
         Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
-
-        if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+        if (!WeepingAngel)
         {
-            Invoke("Hit", TimeUntilHit);
+            if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+            {
+                Invoke("Hit", TimeUntilHit);
+            }
+            else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
+            {
+                Invoke("Hit", TimeUntilHit);
+            }
+            else if(!StandstillAttack || !Attack)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            }
+            else if (Attack && StandstillAttack)
+            {
+                //Debug.Log("Attack");
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                anim.SetBool("Attack", true);
+                Attack = true;
+                Invoke("CancelAttack", recoil);
+            }
         }
-        else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
+        else if (WeepingAngel)
         {
-            Invoke("Hit", TimeUntilHit);
-        }
-        else if(!StandstillAttack || !Attack)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-        }
-        else if (Attack && StandstillAttack)
-        {
-            //Debug.Log("Attack");
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-            anim.SetBool("Attack", true);
-            Attack = true;
-            Invoke("CancelAttack", recoil);
+            if (!InSight)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            }
         }
 
 
