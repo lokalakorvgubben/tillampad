@@ -158,6 +158,11 @@ public class EnemyScript : MonoBehaviour
         enemyHealth -= 25;
         Debug.Log("THUNDER!");
     }
+    public void ApplyFlare(float damage)
+    {
+        enemyHealth -= damage;
+        Debug.Log("Apply Flare");
+    }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
         //This function will apply element, we will probably use our update function �r timed update do apply effects etc.
