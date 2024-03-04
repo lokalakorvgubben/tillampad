@@ -52,7 +52,13 @@ public class FlareScript : MonoBehaviour
         {
             Debug.Log("FLAREATTACK");
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
+
+
+            //Fixa så att detta scalear fire objektet under enemyn med 0.1x per flare.
+            //Kanske till och med ändra huen på elden.
             enemy.ApplyFlare(damage);
+
+            
             isEnabled = false;
             Invoke("KillProjectile", 2.5f);
         }

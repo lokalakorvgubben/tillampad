@@ -6624,7 +6624,7 @@ MonoBehaviour:
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
-  currentBulletType: 0
+  currentBulletType: 1
 --- !u!212 &1752347855 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: 8630ab5d9847280409925ed58e32ebe0, type: 3}
