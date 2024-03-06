@@ -1,8 +1,10 @@
+using NavMeshPlus.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
@@ -28,6 +30,7 @@ public class EnemyScript : MonoBehaviour
     public bool Attack = false;
     public float TimeUntilAttack;
     public float TimeUntilHit;
+    NavMeshAgent agent;
 
     //Time between attacks
     public float recoil;
@@ -61,6 +64,8 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
+
+        agent = GetComponent<NavMeshAgent>();
 
         fireEffect = transform.Find("Fire").gameObject;
         lightningEffect = transform.Find("Lightning").gameObject;
@@ -103,11 +108,13 @@ public class EnemyScript : MonoBehaviour
             timer = 0;
         }
 
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         //Distance of X and Y
         float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
         float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
-        Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
+        Vector2 LocationToMove = new Vector3(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY, 0);
         if (!WeepingAngel)
         {
             if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
@@ -120,7 +127,7 @@ public class EnemyScript : MonoBehaviour
             }
             else if(!StandstillAttack || !Attack)
             {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                agent.SetDestination(LocationToMove);
             }
             else if (Attack && StandstillAttack)
             {
@@ -128,7 +135,7 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                agent.SetDestination(LocationToMove);
                 anim.SetBool("Attack", true);
                 Attack = true;
                 Invoke("CancelAttack", recoil);
@@ -138,7 +145,7 @@ public class EnemyScript : MonoBehaviour
         {
             if (!InSight)
             {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                agent.SetDestination(LocationToMove);
             }
         }
 
