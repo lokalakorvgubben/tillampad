@@ -56,6 +56,7 @@ public class EnemyScript : MonoBehaviour
     //spawns electricity and similar stuff under this transform
     public GameObject effects;
     public GameObject Flare;
+    public GameObject ExperiencePoint;
 
 
     // Start is called before the first frame update
@@ -101,11 +102,15 @@ public class EnemyScript : MonoBehaviour
         float step = speed * speedMult * Time.deltaTime;
         time += Time.deltaTime;
 
-        timer += Time.deltaTime;
-        if (timer > graceTimer)
+        if (onLightning)
         {
-            CancelLightning();
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer > graceTimer)
+            {
+                //Debug.Log("REMOVE ONLIGHTNIGN");
+                CancelLightning();
+                timer = 0;
+            }
         }
 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
