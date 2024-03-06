@@ -36,6 +36,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject flare;
     public float flareFireScale = 1;
     private GameObject fireEffect;
+    private GameObject lightningEffect;
     private ParticleSystem firePs;
 
     public Transform targets;
@@ -62,6 +63,7 @@ public class EnemyScript : MonoBehaviour
         time = TimeUntilAttack;
 
         fireEffect = transform.Find("Fire").gameObject;
+        lightningEffect = transform.Find("Lightning").gameObject;
         firePs = transform.Find("Fire").gameObject.GetComponent<ParticleSystem>();
 
     }
@@ -168,6 +170,11 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= 25;
         Debug.Log("THUNDER!");
+        Invoke("KillCloud", 0.6f);
+    }
+    public void KillCloud()
+    {
+        lightningEffect.SetActive(false);
     }
     public void ApplyFlare(float damage)
     {
@@ -208,8 +215,8 @@ public class EnemyScript : MonoBehaviour
         //-----------------------------------//
         if(onLightning && isWind)
         {
-            Debug.Log("Insert thunder cloud here");
-            Invoke("TemporaryThunderDamage", 1);
+            lightningEffect.SetActive(true);
+            Invoke("TemporaryThunderDamage", 1.8f);
         }
         
         if(onFire && isWind)
@@ -290,7 +297,7 @@ public class EnemyScript : MonoBehaviour
     void CancelFire()
     {
         onFire = false;
-        transform.Find("Fire").gameObject.SetActive(false);
+        fireEffect.SetActive(false);
         flareFireScale = 1;
     }
     void CancelLightning()
