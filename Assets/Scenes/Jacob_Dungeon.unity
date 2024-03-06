@@ -621,7 +621,7 @@ MonoBehaviour:
   baseRadius: 6
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 129
 --- !u!1 &731214093
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b74363aee6fefd48bd3b6a59cd9c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowButtonHold: 0
   gunPoint: {fileID: 1828551210}
   isLeftArm: 0
   fireBullet: {fileID: 3170466227983379168, guid: 0c3c6424df730d548af20bdc99c39208, type: 3}
@@ -881,6 +882,7 @@ MonoBehaviour:
   bulletsToShoot: 8
   GunDamage: 1
   angle: 0
+  currentBulletType: 1
 --- !u!1 &1213184747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,15 +1315,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b74363aee6fefd48bd3b6a59cd9c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowButtonHold: 1
   gunPoint: {fileID: 368383831}
   isLeftArm: 1
   fireBullet: {fileID: 3170466227983379168, guid: 0c3c6424df730d548af20bdc99c39208, type: 3}
   lightningBullet: {fileID: 3170466227983379168, guid: 38b5f2135a76a76459b6baf09b9218c5, type: 3}
-  TimeToShoot: 1
+  TimeToShoot: 0.1
   spread: 20
-  bulletsToShoot: 8
+  bulletsToShoot: 1
   GunDamage: 1
   angle: 0
+  currentBulletType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
