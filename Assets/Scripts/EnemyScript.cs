@@ -34,6 +34,9 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject lightning;
     public GameObject flare;
+    public float flareFireScale = 1;
+    private GameObject fireEffect;
+    private ParticleSystem firePs;
 
     public Transform targets;
 
@@ -57,11 +60,16 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
+
+        fireEffect = transform.Find("Fire").gameObject;
+        firePs = transform.Find("Fire").gameObject.GetComponent<ParticleSystem>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if(onLightning == true)
         {
             speedMult = onLightningSpeedMult;
@@ -70,9 +78,6 @@ public class EnemyScript : MonoBehaviour
         {
             speedMult = 1f;
         }
-
-
-
 
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
@@ -85,10 +90,6 @@ public class EnemyScript : MonoBehaviour
         else if(positionToPlayer < 0){
             SpriteRenderer.flipX = false;
         }
-        
-
-
-
 
         float step = speed * speedMult * Time.deltaTime;
         time += Time.deltaTime;
@@ -150,7 +151,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(onFire == true)
         {
-            enemyHealth -= 0.1f;
+            enemyHealth -= 0.1f * flareFireScale;
             //Debug.Log(enemyHealth);
         }
     }
@@ -170,8 +171,13 @@ public class EnemyScript : MonoBehaviour
     }
     public void ApplyFlare(float damage)
     {
-        enemyHealth -= damage;
         Debug.Log("Apply Flare");
+        enemyHealth -= damage;
+        flareFireScale += 0.1f;
+        onFire = true;
+        fireEffect.SetActive(true);
+        firePs.startSize += 0.1f;
+        Invoke("CancelFire", 4);
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
@@ -180,7 +186,7 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("Fire works");
             onFire = true;
-            transform.Find("Fire").gameObject.SetActive(true);
+            fireEffect.SetActive(true);
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
@@ -212,26 +218,18 @@ public class EnemyScript : MonoBehaviour
             Debug.Log(zRotation);
             SpawnFlares(zRotation);
         }
-
-
-
-
-
-
-
-
     }
     public void SpawnFlares(float zRotation)
     {
         //Instantiate()
         Debug.Log("FUCKING NUKE");
 
-        GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
+        //GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
         for (int i = 0; i < 10; i++)
         {
             Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-40, 40) + zRotation)), effects.transform);
         }
-        Debug.Log(newFlareObject);
+        //Debug.Log(newFlareObject);
 
 
     }
@@ -293,6 +291,7 @@ public class EnemyScript : MonoBehaviour
     {
         onFire = false;
         transform.Find("Fire").gameObject.SetActive(false);
+        flareFireScale = 1;
     }
     void CancelLightning()
     {
