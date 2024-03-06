@@ -10,6 +10,7 @@ public class ArmScript : MonoBehaviour
     public bool isLeftArm;
     public GameObject fireBullet;
     public GameObject lightningBullet;
+    public GameObject windBullet;
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
     public float spread;
@@ -24,6 +25,7 @@ public class ArmScript : MonoBehaviour
     {
         Fire,
         Lightning,
+        Wind,
         // Add more bullet types as needed
     }
 
@@ -99,6 +101,8 @@ public class ArmScript : MonoBehaviour
                 return fireBullet;
             case BulletType.Lightning:
                 return lightningBullet;
+            case BulletType.Wind:
+                return windBullet;
             // Add more cases for additional bullet types
             default:
                 return fireBullet; // Default to fireBullet if the type is not recognized

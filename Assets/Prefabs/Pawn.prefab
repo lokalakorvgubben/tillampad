@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 9109222443315849386}
   - component: {fileID: 2445404116621964578}
   - component: {fileID: 6515697432909628820}
+  - component: {fileID: -2351951777675721791}
+  - component: {fileID: 4529111947422516876}
   m_Layer: 0
   m_Name: Pawn
   m_TagString: Enemy
@@ -167,12 +169,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0618482484e89458b7b9252cc1fdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeepingAngel: 0
   speed: 1
   onLightningSpeedMult: 1
   enemyHealth: 100
   player: {fileID: 0}
   onFire: 0
   onLightning: 0
+  InSight: 0
   desiredDistanceX: 0
   desiredDistanceY: 0.5
   anim: {fileID: 9109222443315849386}
@@ -182,11 +186,51 @@ MonoBehaviour:
   TimeUntilHit: 1
   recoil: 4
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+  flare: {fileID: 0}
+  flareFireScale: 1
   targets: {fileID: 0}
   graceTimer: 1.5
   SpriteRenderer: {fileID: 945953374041603412}
   effects: {fileID: 8743402047897712307}
   Flare: {fileID: 0}
+--- !u!195 &-2351951777675721791
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220760181975895987}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.6
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 3.2
+  m_BaseOffset: 1.6
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4529111947422516876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7220760181975895987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0
