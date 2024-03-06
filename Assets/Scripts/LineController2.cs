@@ -39,8 +39,22 @@ public class LineController2 : MonoBehaviour
         {
             Die();
         }
-        lineRenderer.SetPosition(1, target.position);
-        lineRenderer.SetPosition(0, startEnemy.position);
+        if(target != null)
+        {
+            lineRenderer.SetPosition(1, target.position);
+        }
+        else 
+        {
+            Die();
+        }
+        if(startEnemy != null) {
+            lineRenderer.SetPosition(0, startEnemy.position);
+        }
+        else
+        {
+            Die();
+        }
+        
 
 
         fpsCounter += Time.deltaTime;

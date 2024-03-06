@@ -39,8 +39,10 @@ public class EnemySpawner : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         enemyCount = enemies.Length;
-        if(enemyCount < maxEnemies)
+
+        if (Time.time - nextTimeToSpawn > 1 * spawnInterval && enemyCount < maxEnemies)
         {
+            nextTimeToSpawn = Time.time;
             SpawnEnemy();
         }
     }
@@ -48,11 +50,13 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         Vector3 randomSpawnPoint = MakeRandomSpawnPos();
+        randomSpawnPoint += player.transform.position;
+
         EnemyVariant randomEnemyVariant = GetRandomEnemyVariant();
 
         if (randomSpawnPoint != null && randomEnemyVariant != null)
         {
-            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint));
+            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint), enemies.transform);
             spawnedEnemies.Add(newEnemy);
         }
     }

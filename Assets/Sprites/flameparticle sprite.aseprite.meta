@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1bf0d4c9540f1234fa8d04da11c9837c
+guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -75,7 +75,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -87,7 +87,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638435186079652078
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -119,18 +119,58 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: stickmanwalking_Frame_0
+  - name: flameparticle sprite_Frame_0
     originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
+    pivot: {x: 0.5, y: 0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 22
+      width: 4
+      height: 9
+    spriteID: e95b1259a4cbdb346bfa285623ed270e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 22}
+  - name: flameparticle sprite_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.22222222}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 39
+      width: 4
+      height: 9
+    spriteID: b07d04c91a91b6e4ea834d387120426e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 39}
+  - name: flameparticle sprite_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 6
-      height: 13
-    spriteID: 948cb4fc72d3f144d913b58783b6ed56
+      width: 4
+      height: 10
+    spriteID: d94560229047ac645a8d48ec3e7f122a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,58 +179,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: stickmanwalking_Frame_1
+  - name: flameparticle sprite_Frame_3
     originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
+    pivot: {x: 0.5, y: 0.22222222}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 25
-      width: 6
-      height: 13
-    spriteID: d824dcdb793273944a265c2e6f197689
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 25}
-  - name: stickmanwalking_Frame_2
-    originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 46
-      width: 6
-      height: 13
-    spriteID: 517e2d3c0d0a9654bb205dc4aae3e81a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 46}
-  - name: stickmanwalking_Frame_3
-    originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 18
+      x: 16
       y: 4
-      width: 6
-      height: 13
-    spriteID: ef1ab21cc45717a45b7a22e7f7e555b9
+      width: 4
+      height: 9
+    spriteID: aca4440a43deeb6408da855f3fac2652
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -198,107 +198,87 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 18, y: 4}
-  - name: stickmanwalking_Frame_4
-    originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 18
-      y: 25
-      width: 6
-      height: 13
-    spriteID: 1c1cbc2bd66c17343ab382e0e4a6c685
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 18, y: 25}
-  - name: stickmanwalking_Frame_5
-    originalName: 
-    pivot: {x: 0.6666667, y: -0.07692308}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 18
-      y: 46
-      width: 6
-      height: 13
-    spriteID: ac61161dc5542c043b4b3561da7eedad
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 18, y: 46}
+    uvTransform: {x: 16, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1757933899
-    name: stickmanwalking
+    guid: 1714235212
+    name: flameparticle sprite
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: stickmanwalking_Frame_0
+    - name: flameparticle sprite_Frame_0
       frameIndex: 0
       cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: 948cb4fc72d3f144d913b58783b6ed56
-    - name: stickmanwalking_Frame_1
+        x: 14
+        y: 14
+        width: 4
+        height: 9
+      spriteId: e95b1259a4cbdb346bfa285623ed270e
+    - name: flameparticle sprite_Frame_1
       frameIndex: 1
       cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: d824dcdb793273944a265c2e6f197689
-    - name: stickmanwalking_Frame_2
+        x: 14
+        y: 14
+        width: 4
+        height: 9
+      spriteId: b07d04c91a91b6e4ea834d387120426e
+    - name: flameparticle sprite_Frame_2
       frameIndex: 2
       cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: 517e2d3c0d0a9654bb205dc4aae3e81a
-    - name: stickmanwalking_Frame_3
+        x: 14
+        y: 14
+        width: 4
+        height: 10
+      spriteId: d94560229047ac645a8d48ec3e7f122a
+    - name: flameparticle sprite_Frame_3
       frameIndex: 3
       cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: ef1ab21cc45717a45b7a22e7f7e555b9
-    - name: stickmanwalking_Frame_4
-      frameIndex: 4
-      cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: 1c1cbc2bd66c17343ab382e0e4a6c685
-    - name: stickmanwalking_Frame_5
-      frameIndex: 5
-      cellRect:
-        x: 4
-        y: 1
-        width: 6
-        height: 13
-      spriteId: ac61161dc5542c043b4b3561da7eedad
+        x: 14
+        y: 14
+        width: 4
+        height: 9
+      spriteId: aca4440a43deeb6408da855f3fac2652
     linkedCells: []
     parentIndex: -1
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 16}
+  canvasSize: {x: 32, y: 32}

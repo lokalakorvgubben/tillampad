@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c8f604a71ef79f40b234da1f4e4766e
+guid: 7cd59ac0672cbb34a807cd2a9c8b09c4
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Pawn_Idle
+  - name: Sprite-0001 1
     originalName: 
-    pivot: {x: 0.5833334, y: -0.26086956}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 12
-      height: 23
-    spriteID: 839d37fada8eab8439252f2f58021318
+      width: 64
+      height: 64
+    spriteID: 95c02e8e3a7e444439c576ca084338e4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,23 +142,23 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1317344997
-    name: Pawn_Idle
+    guid: -484652638
+    name: Sprite-0001 1
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Pawn_Idle
+    - name: Sprite-0001 1
       frameIndex: 0
       cellRect:
-        x: 9
-        y: 6
-        width: 12
-        height: 23
-      spriteId: 839d37fada8eab8439252f2f58021318
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      spriteId: 95c02e8e3a7e444439c576ca084338e4
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 64, y: 64}

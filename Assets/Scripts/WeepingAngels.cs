@@ -5,17 +5,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class WeepingAngel : MonoBehaviour
+public class WeepingAngels : MonoBehaviour
 {
-
+    [Header("Stats")]
     public float speed = 1;
     public float enemyHealth = 100;
     public GameObject player;
     public bool onFire = false;
     public bool onLightning = false;
-    private float time;
 
+    [Header("Effects")]
     public GameObject lightning;
+    private GameObject Fire;
 
     public Transform targets;
 
@@ -23,32 +24,30 @@ public class WeepingAngel : MonoBehaviour
 
     private float timer = 0;
     public float graceTimer = 1.5f;
-    private FieldOfView FOV;
+    public bool InSight;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        FOV = player.GetComponent<FieldOfView>();
+        Fire = transform.Find("Fire").GetComponent<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float step = speed * Time.deltaTime;
-        time += Time.deltaTime;
 
         timer += Time.deltaTime;
         if (timer > graceTimer)
         {
             CancelLightning();
         }
-        Vector2 LocationToMove = new Vector2(player.transform.position.y, player.transform.position.x);
 
-        if(FOV.CanSeeEnemy == false)
+        if(!InSight)
         {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
         }
 
         if (enemyHealth <= 0)
@@ -62,7 +61,7 @@ public class WeepingAngel : MonoBehaviour
         if (onFire == true)
         {
             enemyHealth -= 0.1f;
-            Debug.Log(enemyHealth);
+            //Debug.Log(enemyHealth);
         }
     }
     void Die()
@@ -73,23 +72,57 @@ public class WeepingAngel : MonoBehaviour
     {
         enemyHealth -= damage;
     }
-    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
+    public void TemporaryThunderDamage()
     {
-        //This function will apply element, we will probably use our update function är timed update do apply effects etc.
+        enemyHealth -= 25;
+        Debug.Log("THUNDER!");
+    }
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
+    {
+        //This function will apply element, we will probably use our update function ?r timed update do apply effects etc.
         if (isFire == true)
         {
             Debug.Log("Fire works");
             onFire = true;
-            transform.GetChild(1).gameObject.SetActive(true);
+            Fire.gameObject.SetActive(true);
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
         {
             Debug.Log("Lightning Wors");
             onLightning = true;
+            Debug.Log("lightningon");
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
+        if (isWind == true)
+        {
+            Debug.Log("Wind Works");
+        }
+
+
+        //-----------------------------------//
+        //-We start doing interactions below-//
+        //-----------------------------------//
+        if (onLightning && isWind)
+        {
+            Debug.Log("Insert thunder cloud here");
+            Invoke("TemporaryThunderDamage", 1);
+        }
+
+        if (onFire && isWind)
+        {
+            Debug.Log("spawn flare");
+            Debug.Log(zRotation);
+        }
+
+
+
+
+
+
+
+
     }
     void ChainLightning(int lightningJumps)
     {
@@ -148,7 +181,7 @@ public class WeepingAngel : MonoBehaviour
     void CancelFire()
     {
         onFire = false;
-        transform.GetChild(1).gameObject.SetActive(false);
+        Fire.gameObject.SetActive(false);
     }
     void CancelLightning()
     {

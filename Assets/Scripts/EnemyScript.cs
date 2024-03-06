@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
-
+    public bool WeepingAngel;
     public float speed = 1;
     public float onLightningSpeedMult = 1;
     private float speedMult;
@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     public bool onFire = false;
     public bool onLightning = false;
     private float time;
+    public bool InSight;
 
     //Desired Distance for Enemy to Attack
     public float desiredDistanceX = 0;
@@ -32,6 +33,7 @@ public class EnemyScript : MonoBehaviour
     public float recoil;
 
     public GameObject lightning;
+    public GameObject flare;
 
     public Transform targets;
 
@@ -44,12 +46,16 @@ public class EnemyScript : MonoBehaviour
     private float positionToPlayer;
     public SpriteRenderer SpriteRenderer;
 
+    //spawns electricity and similar stuff under this transform
+    public GameObject effects;
+    public GameObject Flare;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
     }
 
@@ -68,10 +74,9 @@ public class EnemyScript : MonoBehaviour
 
 
 
-
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
-        Debug.Log(positionToPlayer);
+        //Debug.Log(positionToPlayer);
         
         if(positionToPlayer > 0)
         {
@@ -100,29 +105,38 @@ public class EnemyScript : MonoBehaviour
         float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
         Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
-
-        if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+        if (!WeepingAngel)
         {
-            Invoke("Hit", TimeUntilHit);
+            if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+            {
+                Invoke("Hit", TimeUntilHit);
+            }
+            else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
+            {
+                Invoke("Hit", TimeUntilHit);
+            }
+            else if(!StandstillAttack || !Attack)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            }
+            else if (Attack && StandstillAttack)
+            {
+                //Debug.Log("Attack");
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                anim.SetBool("Attack", true);
+                Attack = true;
+                Invoke("CancelAttack", recoil);
+            }
         }
-        else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
+        else if (WeepingAngel)
         {
-            Invoke("Hit", TimeUntilHit);
-        }
-        else if(!StandstillAttack || !Attack)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-        }
-        else if (Attack && StandstillAttack)
-        {
-            //Debug.Log("Attack");
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-            anim.SetBool("Attack", true);
-            Attack = true;
-            Invoke("CancelAttack", recoil);
+            if (!InSight)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+            }
         }
 
 
@@ -148,14 +162,25 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= damage;
     }
-    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps)
+
+    public void TemporaryThunderDamage()
+    {
+        enemyHealth -= 25;
+        Debug.Log("THUNDER!");
+    }
+    public void ApplyFlare(float damage)
+    {
+        enemyHealth -= damage;
+        Debug.Log("Apply Flare");
+    }
+    public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
         //This function will apply element, we will probably use our update function �r timed update do apply effects etc.
         if (isFire == true)
         {
             Debug.Log("Fire works");
             onFire = true;
-            transform.GetChild(1).gameObject.SetActive(true);
+            transform.Find("Fire").gameObject.SetActive(true);
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
@@ -166,6 +191,49 @@ public class EnemyScript : MonoBehaviour
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
+        if (isWind == true)
+        {
+            Debug.Log("Wind Works");
+        }
+
+
+        //-----------------------------------//
+        //-We start doing interactions below-//
+        //-----------------------------------//
+        if(onLightning && isWind)
+        {
+            Debug.Log("Insert thunder cloud here");
+            Invoke("TemporaryThunderDamage", 1);
+        }
+        
+        if(onFire && isWind)
+        {
+            Debug.Log("spawn flare");
+            Debug.Log(zRotation);
+            SpawnFlares(zRotation);
+        }
+
+
+
+
+
+
+
+
+    }
+    public void SpawnFlares(float zRotation)
+    {
+        //Instantiate()
+        Debug.Log("FUCKING NUKE");
+
+        GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-40, 40) + zRotation)), effects.transform);
+        }
+        Debug.Log(newFlareObject);
+
+
     }
     public void ChainLightning(int lightningJumps)
     {
@@ -178,7 +246,7 @@ public class EnemyScript : MonoBehaviour
             //Debug.Log(lightningJumps);
             //Debug.Log("Closest target position: " + closestTarget.transform.position);
 
-            GameObject newLightningObject = Instantiate(lightning);
+            GameObject newLightningObject = Instantiate(lightning, effects.transform);
             LineController2 newLightning = newLightningObject.GetComponent<LineController2>();
 
             newLightning.AssignTarget(transform, closestTarget.transform);
@@ -224,7 +292,7 @@ public class EnemyScript : MonoBehaviour
     void CancelFire()
     {
         onFire = false;
-        transform.GetChild(1).gameObject.SetActive(false);
+        transform.Find("Fire").gameObject.SetActive(false);
     }
     void CancelLightning()
     {

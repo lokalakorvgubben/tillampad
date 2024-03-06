@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  onLightningSpeedMult: 1
   enemyHealth: 100
   player: {fileID: 0}
   onFire: 0
@@ -183,8 +184,9 @@ MonoBehaviour:
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   targets: {fileID: 0}
   graceTimer: 1.5
-  DamageParticle: {fileID: 0}
-  DamageNumber: {fileID: 0}
+  SpriteRenderer: {fileID: 945953374041603412}
+  effects: {fileID: 8743402047897712307}
+  Flare: {fileID: 0}
 --- !u!1 &8620133710685296771
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,8 +324,8 @@ Transform:
   m_GameObject: {fileID: 8743402047897712307}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.84, y: -0.83000004, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: -1.08, y: -1.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6002048458188557471}
@@ -464,7 +466,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1046,7 +1048,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.7
+      value: 1.8
       mode: 0
       spread: 0
       speed:
@@ -1663,8 +1665,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1678,21 +1680,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: 2
+          outSlope: 2
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -1722,8 +1724,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startFrame:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 0.9999
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1778,11 +1780,14 @@ ParticleSystem:
     tilesY: 1
     animationType: 0
     rowIndex: 0
-    cycles: 1
-    uvChannelMask: -1
+    cycles: 3
+    uvChannelMask: -15
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 5548082036200891700, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: 603849681681816677, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -1044020311269738948, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
+    - sprite: {fileID: -818126105158700327, guid: 2fdfc3cad9de02c4aa0158ec3c01cf2c, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
