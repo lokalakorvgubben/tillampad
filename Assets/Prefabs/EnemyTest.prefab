@@ -111,6 +111,7 @@ MonoBehaviour:
   recoil: 0
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
   flare: {fileID: 0}
+  flareFireScale: 1
   targets: {fileID: 0}
   graceTimer: 2
   SpriteRenderer: {fileID: 4120764400762115954}
@@ -239,7 +240,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.57, y: -0.59, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8696494395060464637}
