@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float totalXP = 0;
     public float playerSpeed;
     public SpriteRenderer sr;
     public LayerMask groundLayer;
@@ -34,6 +35,21 @@ public class PlayerMovement : MonoBehaviour
         if (colliders.Length > 0)
         {
             transform.Translate(moveSpeed);
+        }
+    }
+    public void GainXP(float xpAmount)
+    {
+        totalXP += xpAmount;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("hit");
+        Debug.Log(collision.name);
+        if (collision.gameObject.GetComponent<ExperienceScript>())
+        {
+            Debug.Log(collision.name + "william");
+            var xp = collision.gameObject.GetComponent<ExperienceScript>();
+            xp.pickUp();
         }
     }
 }

@@ -56,6 +56,7 @@ public class EnemyScript : MonoBehaviour
     //spawns electricity and similar stuff under this transform
     public GameObject effects;
     public GameObject Flare;
+    public GameObject ExperiencePoint;
 
 
     // Start is called before the first frame update
@@ -70,7 +71,6 @@ public class EnemyScript : MonoBehaviour
         fireEffect = transform.Find("Fire").gameObject;
         lightningEffect = transform.Find("Lightning").gameObject;
         firePs = transform.Find("Fire").gameObject.GetComponent<ParticleSystem>();
-
     }
 
     // Update is called once per frame
@@ -101,11 +101,15 @@ public class EnemyScript : MonoBehaviour
         float step = speed * speedMult * Time.deltaTime;
         time += Time.deltaTime;
 
-        timer += Time.deltaTime;
-        if (timer > graceTimer)
+        if (onLightning)
         {
-            CancelLightning();
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer > graceTimer)
+            {
+                //Debug.Log("REMOVE ONLIGHTNIGN");
+                CancelLightning();
+                timer = 0;
+            }
         }
 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
@@ -152,6 +156,7 @@ public class EnemyScript : MonoBehaviour
 
         if(enemyHealth <= 0)
         {
+            DropXP();
             Die();
         }
 
@@ -163,6 +168,11 @@ public class EnemyScript : MonoBehaviour
             enemyHealth -= 0.1f * flareFireScale;
             //Debug.Log(enemyHealth);
         }
+    }
+    void DropXP()
+    {
+        //maybe call function here to the xp to assign xp value depending on what died
+        Instantiate(ExperiencePoint, gameObject.transform.position, gameObject.transform.rotation, effects.transform);
     }
     void Die()
     {
