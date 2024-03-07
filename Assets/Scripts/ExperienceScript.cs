@@ -27,7 +27,7 @@ public class ExperienceScript : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(player.transform.position, transform.position);
-        Debug.Log(dist);
+        //Debug.Log(dist);
         if(dist < xpDistToMove)
         {
             float step = (xpSpeed * Time.deltaTime) / dist;
