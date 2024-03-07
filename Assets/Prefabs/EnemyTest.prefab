@@ -120,6 +120,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 4120764400762115954}
   effects: {fileID: 0}
   Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
+  ExperiencePoint: {fileID: 2881586264876284474, guid: d225a6e2a108aec4ba09ea26053932d7, type: 3}
 --- !u!195 &6404839929193674170
 NavMeshAgent:
   m_ObjectHideFlags: 0

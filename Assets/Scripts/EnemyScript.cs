@@ -71,7 +71,6 @@ public class EnemyScript : MonoBehaviour
         fireEffect = transform.Find("Fire").gameObject;
         lightningEffect = transform.Find("Lightning").gameObject;
         firePs = transform.Find("Fire").gameObject.GetComponent<ParticleSystem>();
-
     }
 
     // Update is called once per frame
@@ -157,6 +156,7 @@ public class EnemyScript : MonoBehaviour
 
         if(enemyHealth <= 0)
         {
+            DropXP();
             Die();
         }
 
@@ -168,6 +168,11 @@ public class EnemyScript : MonoBehaviour
             enemyHealth -= 0.1f * flareFireScale;
             //Debug.Log(enemyHealth);
         }
+    }
+    void DropXP()
+    {
+        //maybe call function here to the xp to assign xp value depending on what died
+        Instantiate(ExperiencePoint, gameObject.transform.position, gameObject.transform.rotation, effects.transform);
     }
     void Die()
     {

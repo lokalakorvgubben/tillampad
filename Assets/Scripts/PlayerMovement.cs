@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float totalXP = 0;
     public float playerSpeed;
     public SpriteRenderer sr;
     float verticalInput;
@@ -25,5 +26,20 @@ public class PlayerMovement : MonoBehaviour
         Vector2 moveSpeed = new Vector2(horizontalInput, verticalInput).normalized * Time.deltaTime * playerSpeed;
         //Debug.Log(moveSpeed.sqrMagnitude);
         transform.Translate(moveSpeed);
+    }
+    public void GainXP(float xpAmount)
+    {
+        totalXP += xpAmount;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("hit");
+        Debug.Log(collision.name);
+        if (collision.gameObject.GetComponent<ExperienceScript>())
+        {
+            Debug.Log(collision.name + "william");
+            var xp = collision.gameObject.GetComponent<ExperienceScript>();
+            xp.pickUp();
+        }
     }
 }
