@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1527645256952642586}
   - component: {fileID: 4262782234194854294}
   m_Layer: 6
-  m_Name: Light 2D
+  m_Name: FlareLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

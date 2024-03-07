@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ArmScript : MonoBehaviour
 {
+    private Mana mana;
     public bool allowButtonHold;
     public Transform gunPoint;
     public bool isLeftArm;
@@ -19,6 +20,7 @@ public class ArmScript : MonoBehaviour
     public float angle;
     private GameObject bullets;
     private bool shooting;
+    public float manaToShoot;
 
 
     public enum BulletType
@@ -35,6 +37,7 @@ public class ArmScript : MonoBehaviour
     void Start()
     {
         bullets = GameObject.Find("Bullets");
+        mana = FindAnyObjectByType<Mana>();
         ShootTime = TimeToShoot;
     }
 
@@ -65,10 +68,11 @@ public class ArmScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         
 
-        if(ShootTime > TimeToShoot)
+        if(ShootTime > TimeToShoot && mana.mana >= manaToShoot)
         {
             if (shooting)
             {
+                mana.mana -= manaToShoot;
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
