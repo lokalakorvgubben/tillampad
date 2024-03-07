@@ -89,7 +89,7 @@ public class ArmScript : MonoBehaviour
                 for (int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
-                    Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
+                    Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                         .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
                 }
 
