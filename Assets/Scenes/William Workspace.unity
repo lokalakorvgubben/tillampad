@@ -2667,7 +2667,7 @@ MonoBehaviour:
   bulletsToShoot: 1
   GunDamage: 10
   angle: 0
-  manaToShoot: 1
+  manaToShoot: 2
   currentBulletType: 0
 --- !u!4 &2051304716 stripped
 Transform:
