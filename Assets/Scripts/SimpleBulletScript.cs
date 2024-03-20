@@ -26,9 +26,10 @@ public class SimpleBulletScript : MonoBehaviour
         Invoke("KillProjectile", 5);
     }
 
-    public void Initialize(float GunDamage)
+    public void Initialize(float GunDamage, float Speed)
     {
         damage = GunDamage;
+        bulletSpeed = Speed;
         Invoke("KillProjectile", 3);
     }
 

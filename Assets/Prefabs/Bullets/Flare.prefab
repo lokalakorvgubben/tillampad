@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flareSpeed: 10
-  damage: 5
+  damage: 1
   rotationSpeed: 90
   speedSlowdown: 1
 --- !u!50 &2953724862006306056

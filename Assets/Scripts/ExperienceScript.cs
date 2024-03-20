@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExperienceScript : MonoBehaviour
@@ -19,7 +17,9 @@ public class ExperienceScript : MonoBehaviour
     {
         hitbox = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(player);
         playerScript = player.gameObject.GetComponent<PlayerMovement>();
+        Debug.Log(playerScript);
         Debug.Log(hitbox);
     }
 
@@ -27,8 +27,8 @@ public class ExperienceScript : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(player.transform.position, transform.position);
-        Debug.Log(dist);
-        if(dist < xpDistToMove)
+        //Debug.Log(dist);
+        if (dist < xpDistToMove)
         {
             float step = (xpSpeed * Time.deltaTime) / dist;
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
@@ -36,7 +36,7 @@ public class ExperienceScript : MonoBehaviour
     }
     public void pickUp()
     {
-
+        Debug.Log(playerScript);
         playerScript.GainXP(xpAmount);
 
 

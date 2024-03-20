@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 1396228374465735125}
   - {fileID: 4668178148912423495}
+  - {fileID: 4465797474615109126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1722705236457926531
@@ -125,7 +126,8 @@ MonoBehaviour:
   graceTimer: 2
   SpriteRenderer: {fileID: 1722705236457926531}
   effects: {fileID: 0}
-  Flare: {fileID: 0}
+  Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
+  ExperiencePoint: {fileID: 2881586264876284474, guid: d225a6e2a108aec4ba09ea26053932d7, type: 3}
 --- !u!114 &6115380423603744915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,14 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f9af4105e1f1c47a407c561010ec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  enemyHealth: 100
-  player: {fileID: 0}
-  onFire: 0
-  onLightning: 0
-  lightning: {fileID: 0}
-  targets: {fileID: 0}
-  graceTimer: 1.5
   InSight: 0
 --- !u!61 &4141332768264893878
 BoxCollider2D:
@@ -202,7 +196,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -5104,3 +5098,69 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1001 &8913069755249265467
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 731005958249444101}
+    m_Modifications:
+    - target: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_Name
+      value: Lightning
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18133335
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.045763806
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.43377566
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.122806035
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.8914387
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -14.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -52.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -178.52
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+--- !u!4 &4465797474615109126 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5064340234492980541, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+  m_PrefabInstance: {fileID: 8913069755249265467}
+  m_PrefabAsset: {fileID: 0}

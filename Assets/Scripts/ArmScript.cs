@@ -5,23 +5,28 @@ using UnityEngine;
 
 public class ArmScript : MonoBehaviour
 {
-    private Mana mana;
-    public bool allowButtonHold;
-    public Transform gunPoint;
-    public bool isLeftArm;
+    [Header("References")]
     public GameObject fireBullet;
     public GameObject lightningBullet;
     public GameObject windBullet;
+    public Transform gunPoint;
+    private GameObject bullets;
+
+    [Header("Bool")]
+    public bool isLeftArm;
+    private bool shooting;
+    public bool allowButtonHold;
+
+    [Header("Gun Stats")]
+    private Mana mana;
+    public float manaToShoot;
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
     public float spread;
     public int bulletsToShoot = 1;
     public float GunDamage;
     public float angle;
-    private GameObject bullets;
-    private bool shooting;
-    public float manaToShoot;
-
+    public float bulletspeed = 5;
 
     public enum BulletType
     {
@@ -73,12 +78,13 @@ public class ArmScript : MonoBehaviour
             if (shooting)
             {
                 mana.mana -= manaToShoot;
+                mana.shoot = true;
                 for(int i = 0; i < bulletsToShoot; i++)
                 {
                     float x = Random.Range(-spread, spread);
                     GameObject bulletPrefab = GetBulletPrefab();
                     Instantiate(bulletPrefab, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
-                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
                 }
 
                 ShootTime = 0;
@@ -90,7 +96,7 @@ public class ArmScript : MonoBehaviour
                 {
                     float x = Random.Range(-spread, spread);
                     Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
-                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage);
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
                 }
 
                 ShootTime = 0;

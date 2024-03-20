@@ -9,64 +9,60 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
-    public bool WeepingAngel;
+
+    [Header("Stats")]
+    public float recoil;
     public float speed = 1;
     public float onLightningSpeedMult = 1;
     private float speedMult;
     public float enemyHealth = 100;
     public GameObject player;
-    public bool onFire = false;
-    public bool onLightning = false;
-    private float time;
-    public bool InSight;
-
-    //Desired Distance for Enemy to Attack
-    public float desiredDistanceX = 0;
-    public float desiredDistanceY = 0;
-    public Animator anim;
-
-    //If the enemy will stop moving after attacking
-    public bool StandstillAttack = false;
-    public bool Attack = false;
     public float TimeUntilAttack;
     public float TimeUntilHit;
-    NavMeshAgent agent;
-
-    //Time between attacks
-    public float recoil;
-
-    public GameObject lightning;
-    public GameObject flare;
+    private float time;
+    public float desiredDistanceX = 0;
+    public float desiredDistanceY = 0;
     public float flareFireScale = 1;
+    private float chainDamage = 10;
+    private float timer = 0;
+    public float graceTimer = 1.5f;
+    private float positionToPlayer;
+
+    [Header("Bools")]
+    public bool InSight;
+    public bool onFire = false;
+    public bool onLightning = false;
+    public bool WeepingAngel;
+    public bool Pawn;
+    public bool StandstillAttack = false;
+    public bool Attack = false;
+
+    [Header("References")]
+    public GameObject blood;
+    public Animator anim;
+    NavMeshAgent agent;
+    public GameObject lightning;
     private GameObject fireEffect;
     private GameObject lightningEffect;
     private ParticleSystem firePs;
-
     public Transform targets;
-
-    private float chainDamage = 10;
-
-    private float timer = 0;
-    public float graceTimer = 1.5f;
-
-    //used to flip character
-    private float positionToPlayer;
     public SpriteRenderer SpriteRenderer;
-
-    //spawns electricity and similar stuff under this transform
-    public GameObject effects;
+    private GameObject effects;
     public GameObject Flare;
     public GameObject ExperiencePoint;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
 
-        agent = GetComponent<NavMeshAgent>();
+        if (!Pawn)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
 
         fireEffect = transform.Find("Fire").gameObject;
         lightningEffect = transform.Find("Lightning").gameObject;
@@ -76,6 +72,23 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject closestTarget = FindClosestTarget();
+        if(closestTarget != null)
+        {
+            if(transform.position.y < closestTarget.transform.position.y)
+            {
+                SpriteRenderer.sortingOrder = closestTarget.GetComponentInChildren<SpriteRenderer>().sortingOrder + 1;
+            }
+        }
+        if (transform.position.y < player.transform.position.y)
+        {
+            SpriteRenderer.sortingOrder = 13;
+        }
+        else
+        {
+            SpriteRenderer.sortingOrder = 9;
+        }
+
 
         if(onLightning == true)
         {
@@ -98,7 +111,8 @@ public class EnemyScript : MonoBehaviour
             SpriteRenderer.flipX = false;
         }
 
-        float step = speed * speedMult * Time.deltaTime;
+        float step = speed * speedMult;
+        agent.speed = step;
         time += Time.deltaTime;
 
         if (onLightning)
@@ -119,30 +133,21 @@ public class EnemyScript : MonoBehaviour
         float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
         Vector2 LocationToMove = new Vector3(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY, 0);
-        if (!WeepingAngel)
+        if (!WeepingAngel && !Pawn)
         {
-            if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+            agent.SetDestination(LocationToMove);
+        }
+        else if (Pawn)
+        {
+            if (distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
             {
-                Invoke("Hit", TimeUntilHit);
-            }
-            else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
-            {
-                Invoke("Hit", TimeUntilHit);
-            }
-            else if(!StandstillAttack || !Attack)
-            {
-                agent.SetDestination(LocationToMove);
-            }
-            else if (Attack && StandstillAttack)
-            {
-                //Debug.Log("Attack");
-            }
-            else
-            {
-                agent.SetDestination(LocationToMove);
                 anim.SetBool("Attack", true);
                 Attack = true;
                 Invoke("CancelAttack", recoil);
+            }
+            else if (!StandstillAttack || !Attack)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
             }
         }
         else if (WeepingAngel)
@@ -150,6 +155,10 @@ public class EnemyScript : MonoBehaviour
             if (!InSight)
             {
                 agent.SetDestination(LocationToMove);
+            }
+            else
+            {
+                agent.SetDestination(transform.position);
             }
         }
 
@@ -176,6 +185,7 @@ public class EnemyScript : MonoBehaviour
     }
     void Die()
     {
+        Instantiate(blood, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     public void TakeDamage(float damage)
@@ -320,13 +330,6 @@ public class EnemyScript : MonoBehaviour
     void CancelLightning()
     {
         onLightning = false;
-    }
-
-    void Hit()
-    {
-        anim.SetBool("Attack", true);
-        Attack = true;
-        Invoke("CancelAttack", recoil);
     }
 
     void CancelAttack()
