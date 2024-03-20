@@ -211,6 +211,8 @@ public class EnemyScript : MonoBehaviour
         onFire = true;
         fireEffect.SetActive(true);
         firePs.startSize += 0.1f;
+        Debug.Log("HORBUGG HITTAD 1");
+        CancelInvoke("CancelFire");
         Invoke("CancelFire", 4);
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
@@ -221,6 +223,8 @@ public class EnemyScript : MonoBehaviour
             Debug.Log("Fire works");
             onFire = true;
             fireEffect.SetActive(true);
+            Debug.Log("HORBUGG HITTAD 2");
+            CancelInvoke("CancelFire");
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
@@ -323,9 +327,11 @@ public class EnemyScript : MonoBehaviour
 
     void CancelFire()
     {
+        Debug.Log("horbugg");
         onFire = false;
         fireEffect.SetActive(false);
         flareFireScale = 1;
+        firePs.startSize = 1f;
     }
     void CancelLightning()
     {
