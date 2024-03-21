@@ -30,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(player.transform.position);
     }
 
     // Update is called once per frame

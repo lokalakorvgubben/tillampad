@@ -103,29 +103,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0618482484e89458b7b9252cc1fdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeepingAngel: 1
+  recoil: 0
   speed: 1
   onLightningSpeedMult: 0.3
   enemyHealth: 100
   player: {fileID: 0}
-  onFire: 0
-  onLightning: 0
-  InSight: 0
-  desiredDistanceX: 0
-  desiredDistanceY: 0
-  anim: {fileID: 0}
-  StandstillAttack: 0
-  Attack: 0
   TimeUntilAttack: 0
   TimeUntilHit: 0
-  recoil: 0
-  lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
-  flare: {fileID: 0}
+  desiredDistanceX: 0
+  desiredDistanceY: 0
   flareFireScale: 1
-  targets: {fileID: 0}
   graceTimer: 2
+  InSight: 0
+  onFire: 0
+  onLightning: 0
+  WeepingAngel: 1
+  Pawn: 0
+  StandstillAttack: 0
+  Attack: 0
+  blood: {fileID: 8165429250266976693, guid: b5fe9a25515b07c42a510efa40618fd8, type: 3}
+  anim: {fileID: 0}
+  lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
+  targets: {fileID: 0}
   SpriteRenderer: {fileID: 1722705236457926531}
-  effects: {fileID: 0}
   Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
   ExperiencePoint: {fileID: 2881586264876284474, guid: d225a6e2a108aec4ba09ea26053932d7, type: 3}
 --- !u!114 &6115380423603744915

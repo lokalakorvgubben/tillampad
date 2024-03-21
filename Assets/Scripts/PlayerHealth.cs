@@ -24,10 +24,6 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Dead");
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            TakeDamage(1);
-        }
         healthBar.setHealth(Health);
     }
 }

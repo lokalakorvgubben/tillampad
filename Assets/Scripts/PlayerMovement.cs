@@ -9,17 +9,22 @@ public class PlayerMovement : MonoBehaviour
     private float XP = 0;
     public float maxXp;
     public int level = 1;
+    private int tmplevel = 1;
+    public int levelthreshold = 5;
     public float playerSpeed;
     public SpriteRenderer sr;
     public LayerMask groundLayer;
     private ExperienceBar xpbar;
     private TextMeshProUGUI levelstext;
+    private AbilitySelect cardSelect;
 
     float verticalInput;
     float horizontalInput;
+    private bool paused = false;
 
     private void Start()
     {
+        cardSelect = FindAnyObjectByType<AbilitySelect>();
         levelstext = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
         xpbar = FindAnyObjectByType<ExperienceBar>();
     }
@@ -30,6 +35,15 @@ public class PlayerMovement : MonoBehaviour
         xpbar.SetMaxExperience(maxXp);
         xpbar.setExperience(XP);
         levelstext.text = "LV." + level;
+
+        if(Time.timeScale == 0)
+        {
+            paused = true;
+        }
+        else
+        {
+            paused = false;
+        }
 
         if(XP >= maxXp)
         {
@@ -42,17 +56,28 @@ public class PlayerMovement : MonoBehaviour
                 XP = 0;
             }
             level++;
+            tmplevel++;
             maxXp *= 1.5f;
         }
 
-        if (horizontalInput == -1)
+        if (!paused)
         {
-            sr.flipX = true;
+            if (horizontalInput == -1)
+            {
+                sr.flipX = true;
+            }
+            else if (horizontalInput == 1)
+            {
+                sr.flipX = false;
+            }
         }
-        else if (horizontalInput == 1)
+
+        if(tmplevel >= levelthreshold)
         {
-            sr.flipX = false;
+            tmplevel = 0;
+            cardSelect.LevelCards();
         }
+
 
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
         Vector2 moveSpeed = moveDirection * Time.deltaTime * playerSpeed;

@@ -21,10 +21,6 @@ public class FieldOfView : MonoBehaviour
 
     private void Update()
     {
-        if (DetectedEnemies.Count == 0)
-        {
-            Debug.Log("No Enemies");
-        }
         FOV();
     }
 
