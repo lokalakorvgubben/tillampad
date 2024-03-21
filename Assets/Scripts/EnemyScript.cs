@@ -50,6 +50,7 @@ public class EnemyScript : MonoBehaviour
     private GameObject effects;
     public GameObject Flare;
     public GameObject ExperiencePoint;
+    public StatManager statManager;
 
 
     void Start()
@@ -57,6 +58,7 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
+        statManager = player.GetComponent<StatManager>();
 
         if (!Pawn)
         {
@@ -263,7 +265,7 @@ public class EnemyScript : MonoBehaviour
         Debug.Log("FUCKING NUKE");
 
         //GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < statManager.flaresAmount; i++)
         {
             Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-40, 40) + zRotation)), effects.transform);
         }
@@ -276,6 +278,7 @@ public class EnemyScript : MonoBehaviour
         onLightning = true;
         GameObject closestTarget = FindClosestTarget();
         //Debug.Log(lightningJumps);
+
         if (closestTarget != null && lightningJumps > 0)
         {
             lightningJumps--;

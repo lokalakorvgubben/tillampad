@@ -2743,7 +2743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   player: {fileID: 1071787662}
-  threshold: 1.75
+  threshold: 1.25
 --- !u!1 &1421990561
 GameObject:
   m_ObjectHideFlags: 0

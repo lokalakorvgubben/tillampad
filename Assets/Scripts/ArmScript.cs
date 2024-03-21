@@ -103,6 +103,10 @@ public class ArmScript : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Space) && !isLeftArm)
                 {
+                    float x = Random.Range(-spread, spread);
+                    Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
+                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
+                }
 
                     for (int i = 0; i < bulletsToShoot; i++)
                     {
