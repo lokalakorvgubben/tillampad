@@ -12,6 +12,8 @@ public class SimpleBulletScript : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private EnemyScript EnemyScript;
     private WeepingAngels WeepingAngels;
+    private GameObject player;
+    private StatManager statManager;
     //public bool[] elements;
     //Comment what value = what element
     //elements[0] = fire
@@ -24,6 +26,9 @@ public class SimpleBulletScript : MonoBehaviour
     void Start()
     {
         Invoke("KillProjectile", 5);
+        player = GameObject.FindGameObjectWithTag("Player");
+        statManager = player.GetComponent<StatManager>();
+
     }
 
     public void Initialize(float GunDamage, float Speed)

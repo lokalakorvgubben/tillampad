@@ -10,6 +10,7 @@ public class ExperienceScript : MonoBehaviour
     private BoxCollider2D hitbox;
     private GameObject player;
     private PlayerMovement playerScript;
+    private PlayerLevel playerLevel;
 
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class ExperienceScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log(player);
         playerScript = player.gameObject.GetComponent<PlayerMovement>();
+        playerLevel = player.gameObject.GetComponent<PlayerLevel>();
         Debug.Log(playerScript);
         Debug.Log(hitbox);
     }
@@ -37,9 +39,7 @@ public class ExperienceScript : MonoBehaviour
     public void pickUp()
     {
         Debug.Log(playerScript);
-        playerScript.GainXP(xpAmount);
-
-
+        playerLevel.GainXP(xpAmount);
         Destroy(gameObject);
     }
 }
