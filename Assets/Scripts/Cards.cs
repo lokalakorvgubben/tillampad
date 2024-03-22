@@ -14,6 +14,8 @@ public class CardsHolder : MonoBehaviour
         public int bulletsAdded = 0;
         public float HealthXIncrease = 1;
         public float healingFactor = 1;
+        public float ManaXIncrease;
+        public float ManaRegen;
         public bool leftArm = false;
         public bool rightArm = false;
         public bool fire = false;

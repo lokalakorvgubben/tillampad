@@ -22,6 +22,8 @@ public class CardRandomizer : MonoBehaviour
     private int bulletsAdded;
     private float HealthIncrease;
     private float healingFactor;
+    private float maxMana;
+    private float manaRegen;
     private bool leftArm;
     private bool rightArm;
     private bool fire;
@@ -74,6 +76,8 @@ public class CardRandomizer : MonoBehaviour
         wind = card.wind;
         totalFlares = card.totalFlares;
         lightningJumps = card.lightningJumps;
+        manaRegen = card.ManaRegen;
+        maxMana = card.ManaXIncrease;
     }
 
     public void RecieveCard()
@@ -90,6 +94,14 @@ public class CardRandomizer : MonoBehaviour
         if(healingFactor > 0)
         {
             stats.playerRegen *= healingFactor;
+        }
+        if(manaRegen > 0)
+        {
+            stats.playerManaRegen *= manaRegen;
+        }
+        if(maxMana > 0)
+        {
+            stats.playerMaxMana *= maxMana;
         }
         stats.flaresAmount += totalFlares;
         stats.lightningJumps += lightningJumps;

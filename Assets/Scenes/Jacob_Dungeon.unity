@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shaped Glass
+  m_text: Small Potion of Vitality
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -416,11 +416,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.2
+  m_fontSize: 8.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 10
+  m_fontSizeMin: 8
   m_fontSizeMax: 18
   m_fontStyle: 33
   m_HorizontalAlignment: 2
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 10
+  m_fontSizeMin: 8
   m_fontSizeMax: 18
   m_fontStyle: 33
   m_HorizontalAlignment: 2
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectAbilities: 0
   cardAbilities: {fileID: 701691910}
-  cursor: {fileID: 0}
+  cursor: {fileID: 2800000, guid: ce319b13309eb704e8a1b70bbdfc35ce, type: 3}
 --- !u!1 &569749262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,9 +1325,12 @@ MonoBehaviour:
   - Name: Shaped Glass
     Description: 2x Damage but half Health
     DamageXIncrease: 2
+    bulletsMultiply: 0
     bulletsAdded: 0
     HealthXIncrease: 0.5
     healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
     leftArm: 0
     rightArm: 0
     fire: 0
@@ -1341,9 +1344,12 @@ MonoBehaviour:
   - Name: Small Potion of Vitality
     Description: Small increase in health
     DamageXIncrease: 0
+    bulletsMultiply: 0
     bulletsAdded: 0
     HealthXIncrease: 1.1
     healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
     leftArm: 0
     rightArm: 0
     fire: 0
@@ -1357,11 +1363,14 @@ MonoBehaviour:
   - Name: Small Potion of Strength
     Description: Small Increase in damage
     DamageXIncrease: 1.1
+    bulletsMultiply: 0
     bulletsAdded: 0
     HealthXIncrease: 0
     healingFactor: 0
-    leftArm: 0
-    rightArm: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 1
+    rightArm: 1
     fire: 0
     lightning: 0
     wind: 0
@@ -1371,11 +1380,14 @@ MonoBehaviour:
     bigandcoolcard: 0
     spawnWeight: 10
   - Name: Fire Gun R
-    Description: Change Right hand to fire element
+    Description: Change Right hand to Fire element
     DamageXIncrease: 0
+    bulletsMultiply: 0
     bulletsAdded: 0
     HealthXIncrease: 0
     healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
     leftArm: 0
     rightArm: 1
     fire: 1
@@ -1387,11 +1399,14 @@ MonoBehaviour:
     bigandcoolcard: 1
     spawnWeight: 3
   - Name: Fire Gun L
-    Description: Change Left hand to fire element
+    Description: Change Left hand to Fire element
     DamageXIncrease: 0
+    bulletsMultiply: 0
     bulletsAdded: 0
     HealthXIncrease: 0
     healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
     leftArm: 1
     rightArm: 0
     fire: 1
@@ -1402,6 +1417,177 @@ MonoBehaviour:
     cursed: 0
     bigandcoolcard: 1
     spawnWeight: 3
+  - Name: Wind Gun L
+    Description: Change Left hand to WInd element
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 1
+    rightArm: 0
+    fire: 0
+    lightning: 0
+    wind: 1
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 1
+    spawnWeight: 3
+  - Name: Wind Gun R
+    Description: Change Left hand to WInd element
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 0
+    rightArm: 1
+    fire: 0
+    lightning: 0
+    wind: 1
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 1
+    spawnWeight: 3
+  - Name: Lightning Gun R
+    Description: Change Left hand to WInd element
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 0
+    rightArm: 1
+    fire: 0
+    lightning: 1
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 1
+    spawnWeight: 3
+  - Name: Lightning Gun L
+    Description: Change Left hand to WInd element
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 1
+    rightArm: 0
+    fire: 0
+    lightning: 1
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 1
+    spawnWeight: 3
+  - Name: Chaos
+    Description: Double the amount of bullets, but half the damage
+    DamageXIncrease: 0.5
+    bulletsMultiply: 1
+    bulletsAdded: 2
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 0
+    rightArm: 0
+    fire: 0
+    lightning: 0
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 1
+    bigandcoolcard: 0
+    spawnWeight: 1
+  - Name: Passive Healing
+    Description: Increase Healing factor lightly
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 1.2
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 0
+    rightArm: 0
+    fire: 0
+    lightning: 0
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 0
+    spawnWeight: 10
+  - Name: Extra Bullets
+    Description: Shoot 3 extra bullets
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 3
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1
+    ManaRegen: 1
+    leftArm: 1
+    rightArm: 1
+    fire: 0
+    lightning: 0
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 0
+    spawnWeight: 6
+  - Name: Potion of Mana
+    Description: Increase maximum Mana
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 1.2
+    ManaRegen: 0
+    leftArm: 1
+    rightArm: 1
+    fire: 0
+    lightning: 0
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 0
+    spawnWeight: 10
+  - Name: Blue Balls
+    Description: Increase mana regen
+    DamageXIncrease: 0
+    bulletsMultiply: 0
+    bulletsAdded: 0
+    HealthXIncrease: 0
+    healingFactor: 0
+    ManaXIncrease: 0
+    ManaRegen: 1.2
+    leftArm: 0
+    rightArm: 0
+    fire: 0
+    lightning: 0
+    wind: 0
+    totalFlares: 0
+    lightningJumps: 0
+    cursed: 0
+    bigandcoolcard: 0
+    spawnWeight: 10
   normal: {r: 0.29669508, g: 0.620458, b: 0.6886792, a: 1}
   cursed: {r: 0.7039565, g: 0.22967836, b: 0.745283, a: 1}
   blessed: {r: 0.754717, g: 0.60826755, b: 0.18986586, a: 1}
@@ -2302,7 +2488,7 @@ GameObject:
   - component: {fileID: 1071787665}
   - component: {fileID: 1071787666}
   - component: {fileID: 1071787668}
-  - component: {fileID: 1071787667}
+  - component: {fileID: 1071787669}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2425,21 +2611,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
---- !u!114 &1071787667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071787660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58cef111af63d8e47a8a19292c3d0f4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xpAmount: 10
-  xpSpeed: 1
-  xpDistToMove: 5
 --- !u!114 &1071787668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2462,6 +2633,21 @@ MonoBehaviour:
   lightningJumps: 3
   flaresAmount: 3
   zapAmount: 3
+--- !u!114 &1071787669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071787660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e588e53d52cfeb04ea15cb572e1c17de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxXp: 10
+  level: 1
+  lvlthreshold: 1
 --- !u!1 &1115594240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,7 +3034,7 @@ MonoBehaviour:
   GunDamage: 2
   angle: 103.66159
   bulletspeed: 5
-  currentBulletType: 1
+  currentBulletType: 2
 --- !u!1 &1213184747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3525,7 +3711,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 10
+  m_fontSizeMin: 8
   m_fontSizeMax: 18
   m_fontStyle: 33
   m_HorizontalAlignment: 2
