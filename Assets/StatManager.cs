@@ -13,6 +13,7 @@ public class StatManager : MonoBehaviour
     public float playerManaRegen = 1;
     public float playerMaxHealth = 100;
     public float playerRegen = 1;
+    public float damage;
 
     [Header("Advanced Stats")]
     [SerializeField]
@@ -21,21 +22,10 @@ public class StatManager : MonoBehaviour
     //for future cloud change
     public float zapAmount = 3;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void RaiseStats()
     {
-        flaresAmount++;
-        lightningJumps++;
-        zapAmount++;
+        playerManaRegen++;
+        playerManaRegen++;
     }
 }

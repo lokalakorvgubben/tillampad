@@ -9,19 +9,20 @@ public class CardsHolder : MonoBehaviour
     {
         public string Name;
         public string Description;
-        public float DamageIncrease;
-        public int bulletsAdded;
-        public float HealthIncrease;
-        public float healingFactor;
-        public bool leftArm;
-        public bool rightArm;
-        public bool fire;
-        public bool lightning;
-        public bool wind;
-        public int totalFlares;
-        public int lightningJumps;
-        public bool cursed;
-        public bool bigandcoolcard;
+        public float DamageXIncrease = 1;
+        public bool bulletsMultiply = false;
+        public int bulletsAdded = 0;
+        public float HealthXIncrease = 1;
+        public float healingFactor = 1;
+        public bool leftArm = false;
+        public bool rightArm = false;
+        public bool fire = false;
+        public bool lightning = false;
+        public bool wind = false;
+        public int totalFlares = 0;
+        public int lightningJumps = 0;
+        public bool cursed = false;
+        public bool bigandcoolcard = false;
         public float spawnWeight = 1f;
     }
 

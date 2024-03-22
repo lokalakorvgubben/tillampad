@@ -32,12 +32,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(tmplevel >= levelthreshold)
-        {
-            tmplevel = 0;
-            cardSelect.LevelCards();
-        }
-
 
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
         Vector2 moveSpeed = moveDirection * Time.deltaTime * playerSpeed;

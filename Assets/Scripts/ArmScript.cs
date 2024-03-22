@@ -28,8 +28,6 @@ public class ArmScript : MonoBehaviour
     public float angle;
     public float bulletspeed = 5;
 
-    private bool paused;
-
     public enum BulletType
     {
         Fire,
@@ -51,26 +49,18 @@ public class ArmScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.timeScale == 0)
-        {
-            paused = true;
-        }
-        else
-        {
-            paused = false;
-        }
         if (!isLeftArm)
         {
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse1);
             else shooting = Input.GetKeyDown(KeyCode.Mouse1);
         }
-        else if(isLeftArm)
+        else if (isLeftArm)
         {
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (!paused)
+        if(Time.timeScale == 1)
         {
             Vector3 mouse_pos;
             Vector3 object_pos;
@@ -83,15 +73,15 @@ public class ArmScript : MonoBehaviour
             mouse_pos.y = mouse_pos.y - object_pos.y;
             angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        
 
-            if(ShootTime > TimeToShoot && mana.mana >= manaToShoot)
+
+            if (ShootTime > TimeToShoot && mana.mana >= manaToShoot)
             {
                 if (shooting)
                 {
                     mana.mana -= manaToShoot;
                     mana.shoot = true;
-                    for(int i = 0; i < bulletsToShoot; i++)
+                    for (int i = 0; i < bulletsToShoot; i++)
                     {
                         float x = Random.Range(-spread, spread);
                         GameObject bulletPrefab = GetBulletPrefab();
@@ -103,15 +93,12 @@ public class ArmScript : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Space) && !isLeftArm)
                 {
-                    float x = Random.Range(-spread, spread);
-                    Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
-                        .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
-                }
 
                     for (int i = 0; i < bulletsToShoot; i++)
                     {
                         float x = Random.Range(-spread, spread);
-                        Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
+                        Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform);
+                        Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                             .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
                     }
 

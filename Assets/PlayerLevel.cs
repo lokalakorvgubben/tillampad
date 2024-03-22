@@ -10,6 +10,10 @@ public class PlayerLevel : MonoBehaviour
     private float XP = 0;
     public float maxXp;
     public int level = 1;
+    private int tmplevel = 1;
+    public int lvlthreshold = 5;
+
+    private AbilitySelect cardselect;
     private ExperienceBar xpbar;
     private TextMeshProUGUI levelsText;
     private StatManager statManager;
@@ -17,6 +21,7 @@ public class PlayerLevel : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        cardselect = FindAnyObjectByType<AbilitySelect>();
         levelsText = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
         xpbar = FindAnyObjectByType<ExperienceBar>();
         statManager = GetComponent<StatManager>();
@@ -28,6 +33,12 @@ public class PlayerLevel : MonoBehaviour
         xpbar.SetMaxExperience(maxXp);
         xpbar.setExperience(XP);
         levelsText.text = "LV." + level;
+
+        if(tmplevel >= lvlthreshold)
+        {
+            cardselect.LevelCards();
+            tmplevel = 0;
+        }
 
         if (XP >= maxXp)
         {
@@ -44,6 +55,7 @@ public class PlayerLevel : MonoBehaviour
     }
     private void LevelUp()
     {
+        tmplevel++;
         level++;
         maxXp *= 1.5f;
         statManager.RaiseStats();

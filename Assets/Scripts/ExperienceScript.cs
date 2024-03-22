@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ExperienceScript : MonoBehaviour
 {
-
-
     public float xpAmount = 5;
     public float xpSpeed = 1;
     public float xpDistToMove = 5;
