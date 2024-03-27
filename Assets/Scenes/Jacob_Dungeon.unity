@@ -5942,6 +5942,8 @@ MonoBehaviour:
   selectAbilities: 0
   cardAbilities: {fileID: 701691910}
   cursor: {fileID: 2800000, guid: ce319b13309eb704e8a1b70bbdfc35ce, type: 3}
+  PauseMenu: {fileID: 0}
+  paused: 0
 --- !u!1 &569749262
 GameObject:
   m_ObjectHideFlags: 0
@@ -6724,7 +6726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0d5c09721d5014994b86849736038d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 10
+  maxHealth: 0
 --- !u!212 &868978226 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3626916397498700004, guid: 8630ab5d9847280409925ed58e32ebe0, type: 3}
@@ -7854,7 +7856,7 @@ MonoBehaviour:
   windBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
   gunPoint: {fileID: 1828551210}
   isLeftArm: 0
-  allowButtonHold: 0
+  allowButtonHold: 1
   manaToShoot: 8
   TimeToShoot: 1
   spread: 20
@@ -7862,7 +7864,7 @@ MonoBehaviour:
   GunDamage: 2
   angle: 103.66159
   bulletspeed: 5
-  currentBulletType: 1
+  currentBulletType: 0
 --- !u!1 &1213184747
 GameObject:
   m_ObjectHideFlags: 0
@@ -9357,7 +9359,7 @@ MonoBehaviour:
   windBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
   gunPoint: {fileID: 368383831}
   isLeftArm: 1
-  allowButtonHold: 0
+  allowButtonHold: 1
   manaToShoot: 1
   TimeToShoot: 0.1
   spread: 10
@@ -9365,7 +9367,7 @@ MonoBehaviour:
   GunDamage: 3
   angle: 99.48428
   bulletspeed: 10
-  currentBulletType: 1
+  currentBulletType: 2
 --- !u!1 &2072628906
 GameObject:
   m_ObjectHideFlags: 0
