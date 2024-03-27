@@ -185,11 +185,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 5
   damage: 10
-  Blood: {fileID: 4810166695218598817, guid: acd0602619212e344b78484250bf6923, type: 3}
   isFire: 1
   isLightning: 0
   isWind: 0
-  lightningJumps: 0
+  lightningJumps: 2
 --- !u!50 &1820519719569274204
 Rigidbody2D:
   serializedVersion: 4

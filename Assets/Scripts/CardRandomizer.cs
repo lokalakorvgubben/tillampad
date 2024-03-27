@@ -36,8 +36,6 @@ public class CardRandomizer : MonoBehaviour
     {
         RightHand = GameObject.Find("Player/Arms/RightArm").GetComponent<ArmScript>();
         LeftHand = GameObject.Find("Player/Arms/LeftArm").GetComponent<ArmScript>();
-        Debug.Log(RightHand.name);
-        Debug.Log(LeftHand.name);
         stats = FindAnyObjectByType<StatManager>();
         image = GetComponent<Image>();
         CardsSelector = GameObject.Find("AbilitySelector");
@@ -83,10 +81,6 @@ public class CardRandomizer : MonoBehaviour
     public void RecieveCard()
     {
         CardsSelector.SetActive(false);
-        if(DamageIncrease > 0)
-        {
-            stats.damage *= DamageIncrease;
-        }
         if(HealthIncrease > 0)
         {
             stats.playerMaxHealth *= HealthIncrease;

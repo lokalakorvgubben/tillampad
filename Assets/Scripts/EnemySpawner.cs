@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,7 +18,12 @@ public class EnemySpawner : MonoBehaviour
     public List<EnemyVariant> enemyVariants = new List<EnemyVariant>();
     private List<GameObject> spawnedEnemies = new List<GameObject>();
 
-
+    private float time;
+    public float TimeUntilIncrease = 600;
+    public int EnemiesIncrease;
+    public TextMeshProUGUI timeShow;
+    private float SecondsToShow;
+    private int MinutesToShow = 0;
 
     public float spawnInterval = 3f;
     public float nextTimeToSpawn = 0f;
@@ -35,6 +41,13 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
+        UpdateTime();
+        if(time >= TimeUntilIncrease)
+        {
+            maxEnemies += EnemiesIncrease;
+            time = 0;
+        }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         enemyCount = enemies.Length;
@@ -107,5 +120,23 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void UpdateTime()
+    {
+        SecondsToShow += Time.deltaTime;
+        if(SecondsToShow >= 60)
+        {
+            MinutesToShow++;
+            SecondsToShow = 0;
+        }
+        if(SecondsToShow < 10)
+        {
+            timeShow.text = MinutesToShow.ToString() + ":0" +  ((int)SecondsToShow).ToString();
+        }
+        else
+        {
+            timeShow.text = MinutesToShow.ToString() + ":" + ((int)SecondsToShow).ToString();
+        }
     }
 }

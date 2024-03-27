@@ -13,7 +13,6 @@ public class StatManager : MonoBehaviour
     public float playerManaRegen = 1;
     public float playerMaxHealth = 100;
     public float playerRegen = 1;
-    public float damage;
 
     [Header("Advanced Stats")]
     [SerializeField]
@@ -25,7 +24,6 @@ public class StatManager : MonoBehaviour
 
     public void RaiseStats()
     {
-        playerManaRegen++;
         playerManaRegen++;
     }
 }
