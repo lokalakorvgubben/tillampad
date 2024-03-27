@@ -11,6 +11,7 @@ public class ArmScript : MonoBehaviour
     public GameObject windBullet;
     public Transform gunPoint;
     private GameObject bullets;
+    private AbilitySelect pausing;
 
     [Header("Bool")]
     public bool isLeftArm;
@@ -42,6 +43,7 @@ public class ArmScript : MonoBehaviour
     void Start()
     {
         bullets = GameObject.Find("Bullets");
+        pausing = FindAnyObjectByType<AbilitySelect>();
         mana = FindAnyObjectByType<Mana>();
         ShootTime = TimeToShoot;
     }
@@ -59,8 +61,7 @@ public class ArmScript : MonoBehaviour
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
-
-        if(Time.timeScale == 1)
+        if(pausing.paused == false)
         {
             Vector3 mouse_pos;
             Vector3 object_pos;

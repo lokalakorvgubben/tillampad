@@ -5,25 +5,37 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float Health;
+    public float maxHealth;
+    private float health;
     private HealthBar healthBar;
+    private StatManager statManager;
 
     private void Start()
     {
+        statManager = FindAnyObjectByType<StatManager>();
         healthBar = GameObject.FindAnyObjectByType<HealthBar>();
-        healthBar.SetMaxHealth(Health);
+
+        maxHealth = statManager.playerMaxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        health = maxHealth;
     }
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        health -= damage;
     }
 
     private void Update()
     {
-        if(Health <= 0)
+        maxHealth = statManager.playerMaxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        if (health <= 0)
         {
             Debug.Log("Dead");
         }
-        healthBar.setHealth(Health);
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthBar.setHealth(health);
     }
 }

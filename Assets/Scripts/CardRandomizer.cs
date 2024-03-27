@@ -44,6 +44,14 @@ public class CardRandomizer : MonoBehaviour
         description = transform.Find("Description").GetComponent<TextMeshProUGUI>();
     }
 
+    private void Update()
+    {
+        if (isActiveAndEnabled)
+        {
+            Time.timeScale = 0f;
+        }
+    }
+
     public void GetCard()
     {
 

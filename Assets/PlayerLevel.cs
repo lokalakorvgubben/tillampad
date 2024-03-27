@@ -66,11 +66,8 @@ public class PlayerLevel : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hit");
-        Debug.Log(collision.name);
         if (collision.gameObject.GetComponent<ExperienceScript>())
         {
-            Debug.Log(collision.name + "william");
             var xp = collision.gameObject.GetComponent<ExperienceScript>();
             xp.pickUp();
         }

@@ -16,11 +16,8 @@ public class ExperienceScript : MonoBehaviour
     {
         hitbox = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(player);
         playerScript = player.gameObject.GetComponent<PlayerMovement>();
         playerLevel = player.gameObject.GetComponent<PlayerLevel>();
-        Debug.Log(playerScript);
-        Debug.Log(hitbox);
     }
 
     // Update is called once per frame
@@ -36,7 +33,6 @@ public class ExperienceScript : MonoBehaviour
     }
     public void pickUp()
     {
-        Debug.Log(playerScript);
         playerLevel.GainXP(xpAmount);
         Destroy(gameObject);
     }

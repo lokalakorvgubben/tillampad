@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
 {
 
     [Header("Stats")]
+    public float damage = 1;
     public float recoil;
     public float speed = 1;
     public float onLightningSpeedMult = 1;
@@ -198,7 +199,6 @@ public class EnemyScript : MonoBehaviour
     public void TemporaryThunderDamage()
     {
         enemyHealth -= 25;
-        Debug.Log("THUNDER!");
         Invoke("KillCloud", 0.6f);
     }
     public void KillCloud()
@@ -231,9 +231,7 @@ public class EnemyScript : MonoBehaviour
         }
         if (isLightning == true)
         {
-            Debug.Log("Lightning Wors");
             onLightning = true;
-            Debug.Log("lightningon");
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }

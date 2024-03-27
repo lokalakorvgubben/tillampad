@@ -34,4 +34,12 @@ public class CardsHolder : MonoBehaviour
     public Color normal;
     public Color cursed;
     public Color blessed;
+
+    private void Update()
+    {
+        if (isActiveAndEnabled)
+        {
+            Time.timeScale = 0f;
+        }
+    }
 }
