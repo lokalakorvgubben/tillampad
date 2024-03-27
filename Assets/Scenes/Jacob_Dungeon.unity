@@ -3704,7 +3704,7 @@ MonoBehaviour:
   windBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
   gunPoint: {fileID: 1828551210}
   isLeftArm: 0
-  allowButtonHold: 0
+  allowButtonHold: 1
   manaToShoot: 8
   TimeToShoot: 1
   spread: 20
@@ -5495,7 +5495,7 @@ MonoBehaviour:
   windBullet: {fileID: 3170466227983379168, guid: ea04fb3e03ac2fc45857a0738322343f, type: 3}
   gunPoint: {fileID: 368383831}
   isLeftArm: 1
-  allowButtonHold: 0
+  allowButtonHold: 1
   manaToShoot: 1
   TimeToShoot: 0.1
   spread: 10
@@ -5503,7 +5503,7 @@ MonoBehaviour:
   damage: 3
   angle: 99.48428
   bulletspeed: 10
-  currentBulletType: 1
+  currentBulletType: 2
 --- !u!1 &2072628906
 GameObject:
   m_ObjectHideFlags: 0

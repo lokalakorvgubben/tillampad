@@ -17,6 +17,7 @@ public class PlayerLevel : MonoBehaviour
     private ExperienceBar xpbar;
     private TextMeshProUGUI levelsText;
     private StatManager statManager;
+    private Mana mana;
 
     // Start is called before the first frame update
     private void Start()
@@ -25,6 +26,7 @@ public class PlayerLevel : MonoBehaviour
         levelsText = GameObject.Find("Level").GetComponent<TextMeshProUGUI>();
         xpbar = FindAnyObjectByType<ExperienceBar>();
         statManager = GetComponent<StatManager>();
+        mana = GetComponent<Mana>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class PlayerLevel : MonoBehaviour
     }
     private void LevelUp()
     {
+        mana.mana = mana.maxMana;
         tmplevel++;
         level++;
         maxXp *= 1.5f;

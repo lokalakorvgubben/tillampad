@@ -15,6 +15,8 @@ public class Mana : MonoBehaviour
     public float timeuntilrecovery = 1;
     private float time;
     private TextMeshProUGUI count;
+    private GameObject player;
+    private StatManager statManager;
 
     private void Start()
     {
@@ -22,10 +24,13 @@ public class Mana : MonoBehaviour
         mana = maxMana;
         manaBar = GameObject.FindAnyObjectByType<ManaBar>();
         count = manaBar.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        statManager = player.GetComponent<StatManager>();
     }
 
     private void Update()
     {
+        maxMana = statManager.playerMaxMana;
         count.text = ((int)mana) + "/" + maxMana;
         time += Time.deltaTime;
         mana = Mathf.Clamp(mana, 0, maxMana);
