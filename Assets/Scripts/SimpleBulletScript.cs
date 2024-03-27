@@ -12,6 +12,8 @@ public class SimpleBulletScript : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private EnemyScript EnemyScript;
     private WeepingAngels WeepingAngels;
+    private GameObject player;
+    private StatManager statManager;
     //public bool[] elements;
     //Comment what value = what element
     //elements[0] = fire
@@ -24,11 +26,15 @@ public class SimpleBulletScript : MonoBehaviour
     void Start()
     {
         Invoke("KillProjectile", 5);
+        player = GameObject.FindGameObjectWithTag("Player");
+        statManager = player.GetComponent<StatManager>();
+
     }
 
-    public void Initialize(float GunDamage)
+    public void Initialize(float GunDamage, float Speed)
     {
         damage = GunDamage;
+        bulletSpeed = Speed;
         Invoke("KillProjectile", 3);
     }
 
@@ -44,7 +50,6 @@ public class SimpleBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hit");
         Debug.Log(collision.name);
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -55,7 +60,7 @@ public class SimpleBulletScript : MonoBehaviour
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             zRotation = transform.localRotation.eulerAngles.z;
             enemy.TakeDamage(damage);
-            enemy.ApplyElement(isFire, isLightning, lightningJumps, isWind, zRotation);
+            enemy.ApplyElement(isFire, isLightning, statManager.lightningJumps, isWind, zRotation);
             isEnabled = false;
             Invoke("KillProjectile", 0.1f);
         }

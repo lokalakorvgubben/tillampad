@@ -12,6 +12,7 @@ public class FlareScript : MonoBehaviour
     public float damage = 5;
     public float rotationSpeed = 25;
     public float speedSlowdown;
+    private bool firstEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class FlareScript : MonoBehaviour
         transform.Translate(Vector2.right * Time.deltaTime * finalFlareSpeed);
         finalFlareSpeed -= finalFlareSpeed * speedSlowdown * Time.deltaTime;
 
-        if(flareSpeed < 0.2f)
+        if (flareSpeed < 0.2f)
         {
             //KillProjectile();
         }
@@ -37,7 +38,7 @@ public class FlareScript : MonoBehaviour
             //Debug.Log(transform.localRotation.eulerAngles.z);
             transform.eulerAngles = new Vector3(0, 0, transform.localRotation.eulerAngles.z - rotationSpeed * Time.deltaTime);
         }
-        
+
         if (transform.localRotation.eulerAngles.z > 90f && transform.localRotation.eulerAngles.z < 270f)
         {
             //Debug.Log(transform.localRotation.eulerAngles.z);
@@ -58,8 +59,14 @@ public class FlareScript : MonoBehaviour
             //Kanske till och med ändra huen på elden.
             enemy.ApplyFlare(damage);
 
-            
-            isEnabled = false;
+            if (!firstEnemy)
+            {
+                firstEnemy = true;
+            }
+            else
+            {
+                //isEnabled = false;
+            }
             Invoke("KillProjectile", 2.5f);
         }
         //playerMovement.playerHealth = playerMovement.playerHealth - damage;

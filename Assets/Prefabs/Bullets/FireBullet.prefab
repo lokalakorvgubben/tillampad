@@ -188,7 +188,7 @@ MonoBehaviour:
   isFire: 1
   isLightning: 0
   isWind: 0
-  lightningJumps: 0
+  lightningJumps: 2
 --- !u!50 &1820519719569274204
 Rigidbody2D:
   serializedVersion: 4

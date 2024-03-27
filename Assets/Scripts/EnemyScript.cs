@@ -1,67 +1,98 @@
+using NavMeshPlus.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
-    public bool WeepingAngel;
+
+    [Header("Stats")]
+    public float damage = 1;
+    public float recoil;
     public float speed = 1;
     public float onLightningSpeedMult = 1;
     private float speedMult;
     public float enemyHealth = 100;
     public GameObject player;
-    public bool onFire = false;
-    public bool onLightning = false;
-    private float time;
-    public bool InSight;
-
-    //Desired Distance for Enemy to Attack
-    public float desiredDistanceX = 0;
-    public float desiredDistanceY = 0;
-    public Animator anim;
-
-    //If the enemy will stop moving after attacking
-    public bool StandstillAttack = false;
-    public bool Attack = false;
     public float TimeUntilAttack;
     public float TimeUntilHit;
-
-    //Time between attacks
-    public float recoil;
-
-    public GameObject lightning;
-    public GameObject flare;
-
-    public Transform targets;
-
+    private float time;
+    public float desiredDistanceX = 0;
+    public float desiredDistanceY = 0;
+    public float flareFireScale = 1;
     private float chainDamage = 10;
-
     private float timer = 0;
     public float graceTimer = 1.5f;
-
-    //used to flip character
     private float positionToPlayer;
+
+    [Header("Bools")]
+    public bool InSight;
+    public bool onFire = false;
+    public bool onLightning = false;
+    public bool WeepingAngel;
+    public bool Pawn;
+    public bool StandstillAttack = false;
+    public bool Attack = false;
+
+    [Header("References")]
+    public GameObject blood;
+    public Animator anim;
+    NavMeshAgent agent;
+    public GameObject lightning;
+    private GameObject fireEffect;
+    private GameObject lightningEffect;
+    private ParticleSystem firePs;
+    public Transform targets;
     public SpriteRenderer SpriteRenderer;
-
-    //spawns electricity and similar stuff under this transform
-    public GameObject effects;
+    private GameObject effects;
     public GameObject Flare;
+    public GameObject ExperiencePoint;
+    public StatManager statManager;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
         time = TimeUntilAttack;
+        statManager = player.GetComponent<StatManager>();
+
+        if (!Pawn)
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+
+        fireEffect = transform.Find("Fire").gameObject;
+        lightningEffect = transform.Find("Lightning").gameObject;
+        firePs = transform.Find("Fire").gameObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject closestTarget = FindClosestTarget();
+        if(closestTarget != null)
+        {
+            if(transform.position.y < closestTarget.transform.position.y)
+            {
+                SpriteRenderer.sortingOrder = closestTarget.GetComponentInChildren<SpriteRenderer>().sortingOrder + 1;
+            }
+        }
+        if (transform.position.y < player.transform.position.y)
+        {
+            SpriteRenderer.sortingOrder = 13;
+        }
+        else
+        {
+            SpriteRenderer.sortingOrder = 9;
+        }
+
+
         if(onLightning == true)
         {
             speedMult = onLightningSpeedMult;
@@ -70,9 +101,6 @@ public class EnemyScript : MonoBehaviour
         {
             speedMult = 1f;
         }
-
-
-
 
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
@@ -85,63 +113,62 @@ public class EnemyScript : MonoBehaviour
         else if(positionToPlayer < 0){
             SpriteRenderer.flipX = false;
         }
-        
 
-
-
-
-        float step = speed * speedMult * Time.deltaTime;
+        float step = speed * speedMult;
+        agent.speed = step;
         time += Time.deltaTime;
 
-        timer += Time.deltaTime;
-        if (timer > graceTimer)
+        if (onLightning)
         {
-            CancelLightning();
-            timer = 0;
+            timer += Time.deltaTime;
+            if (timer > graceTimer)
+            {
+                //Debug.Log("REMOVE ONLIGHTNIGN");
+                CancelLightning();
+                timer = 0;
+            }
         }
 
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         //Distance of X and Y
         float distanceX = Mathf.Abs((player.transform.position - transform.position).x);
         float distanceY = Mathf.Abs((player.transform.position - transform.position).y);
 
-        Vector2 LocationToMove = new Vector2(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY);
-        if (!WeepingAngel)
+        Vector2 LocationToMove = new Vector3(player.transform.position.x + desiredDistanceX, player.transform.position.y + desiredDistanceY, 0);
+        if (!WeepingAngel && !Pawn)
         {
-            if(distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
+            agent.SetDestination(LocationToMove);
+        }
+        else if (Pawn)
+        {
+            if (distanceY == desiredDistanceY && distanceX == desiredDistanceX && !Attack && StandstillAttack && time > TimeUntilAttack)
             {
-                Invoke("Hit", TimeUntilHit);
-            }
-            else if(distanceX == desiredDistanceX && distanceY == desiredDistanceY && !Attack && !StandstillAttack && time > TimeUntilAttack)
-            {
-                Invoke("Hit", TimeUntilHit);
-            }
-            else if(!StandstillAttack || !Attack)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
-            }
-            else if (Attack && StandstillAttack)
-            {
-                //Debug.Log("Attack");
-            }
-            else
-            {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
                 anim.SetBool("Attack", true);
                 Attack = true;
                 Invoke("CancelAttack", recoil);
+            }
+            else if (!StandstillAttack || !Attack)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
             }
         }
         else if (WeepingAngel)
         {
             if (!InSight)
             {
-                transform.position = Vector2.MoveTowards(transform.position, LocationToMove, step);
+                agent.SetDestination(LocationToMove);
+            }
+            else
+            {
+                agent.SetDestination(transform.position);
             }
         }
 
 
         if(enemyHealth <= 0)
         {
+            DropXP();
             Die();
         }
 
@@ -150,12 +177,18 @@ public class EnemyScript : MonoBehaviour
     {
         if(onFire == true)
         {
-            enemyHealth -= 0.1f;
+            enemyHealth -= 0.1f * flareFireScale;
             //Debug.Log(enemyHealth);
         }
     }
+    void DropXP()
+    {
+        //maybe call function here to the xp to assign xp value depending on what died
+        Instantiate(ExperiencePoint, gameObject.transform.position, gameObject.transform.rotation, effects.transform);
+    }
     void Die()
     {
+        Instantiate(blood, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     public void TakeDamage(float damage)
@@ -166,12 +199,23 @@ public class EnemyScript : MonoBehaviour
     public void TemporaryThunderDamage()
     {
         enemyHealth -= 25;
-        Debug.Log("THUNDER!");
+        Invoke("KillCloud", 0.6f);
+    }
+    public void KillCloud()
+    {
+        lightningEffect.SetActive(false);
     }
     public void ApplyFlare(float damage)
     {
-        enemyHealth -= damage;
         Debug.Log("Apply Flare");
+        enemyHealth -= damage;
+        flareFireScale += 0.1f;
+        onFire = true;
+        fireEffect.SetActive(true);
+        firePs.startSize += 0.1f;
+        Debug.Log("HORBUGG HITTAD 1");
+        CancelInvoke("CancelFire");
+        Invoke("CancelFire", 4);
     }
     public void ApplyElement(bool isFire, bool isLightning, int lightningJumps, bool isWind, float zRotation)
     {
@@ -180,14 +224,14 @@ public class EnemyScript : MonoBehaviour
         {
             Debug.Log("Fire works");
             onFire = true;
-            transform.Find("Fire").gameObject.SetActive(true);
+            fireEffect.SetActive(true);
+            Debug.Log("HORBUGG HITTAD 2");
+            CancelInvoke("CancelFire");
             Invoke("CancelFire", 4);
         }
         if (isLightning == true)
         {
-            Debug.Log("Lightning Wors");
             onLightning = true;
-            Debug.Log("lightningon");
             ChainLightning(lightningJumps);
             //Invoke("CancelFire", 4);
         }
@@ -202,8 +246,8 @@ public class EnemyScript : MonoBehaviour
         //-----------------------------------//
         if(onLightning && isWind)
         {
-            Debug.Log("Insert thunder cloud here");
-            Invoke("TemporaryThunderDamage", 1);
+            lightningEffect.SetActive(true);
+            Invoke("TemporaryThunderDamage", 1.8f);
         }
         
         if(onFire && isWind)
@@ -212,26 +256,18 @@ public class EnemyScript : MonoBehaviour
             Debug.Log(zRotation);
             SpawnFlares(zRotation);
         }
-
-
-
-
-
-
-
-
     }
     public void SpawnFlares(float zRotation)
     {
         //Instantiate()
         Debug.Log("FUCKING NUKE");
 
-        GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
-        for (int i = 0; i < 10; i++)
+        //GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
+        for (int i = 0; i < statManager.flaresAmount; i++)
         {
             Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-40, 40) + zRotation)), effects.transform);
         }
-        Debug.Log(newFlareObject);
+        //Debug.Log(newFlareObject);
 
 
     }
@@ -240,6 +276,7 @@ public class EnemyScript : MonoBehaviour
         onLightning = true;
         GameObject closestTarget = FindClosestTarget();
         //Debug.Log(lightningJumps);
+
         if (closestTarget != null && lightningJumps > 0)
         {
             lightningJumps--;
@@ -291,19 +328,15 @@ public class EnemyScript : MonoBehaviour
 
     void CancelFire()
     {
+        Debug.Log("horbugg");
         onFire = false;
-        transform.Find("Fire").gameObject.SetActive(false);
+        fireEffect.SetActive(false);
+        flareFireScale = 1;
+        firePs.startSize = 1f;
     }
     void CancelLightning()
     {
         onLightning = false;
-    }
-
-    void Hit()
-    {
-        anim.SetBool("Attack", true);
-        Attack = true;
-        Invoke("CancelAttack", recoil);
     }
 
     void CancelAttack()
