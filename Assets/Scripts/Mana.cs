@@ -46,5 +46,9 @@ public class Mana : MonoBehaviour
         {
             manaRecovery = initialmanaRec;
         }
+        if(mana >= maxMana)
+        {
+            mana = maxMana;
+        }
     }
 }

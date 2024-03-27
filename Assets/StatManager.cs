@@ -13,6 +13,7 @@ public class StatManager : MonoBehaviour
     public float playerManaRegen = 1;
     public float playerMaxHealth = 100;
     public float playerRegen = 1;
+    public float damageMultiplier;
 
     [Header("Advanced Stats")]
     [SerializeField]

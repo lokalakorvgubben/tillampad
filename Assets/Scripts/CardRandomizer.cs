@@ -105,15 +105,15 @@ public class CardRandomizer : MonoBehaviour
         {
             stats.playerMaxMana *= maxMana;
         }
+        if (DamageIncrease > 0)
+        {
+            stats.damageMultiplier += DamageIncrease;
+        }
         stats.flaresAmount += totalFlares;
         stats.lightningJumps += lightningJumps;
 
         if (leftArm)
         {
-            if(DamageIncrease > 0)
-            {
-                LeftHand.GunDamage *= DamageIncrease;
-            }
             if(bulletsmultiply)
             {
                 LeftHand.bulletsToShoot *= bulletsAdded;
@@ -137,10 +137,6 @@ public class CardRandomizer : MonoBehaviour
         }
         if (rightArm)
         {
-            if(DamageIncrease > 0)
-            {
-                RightHand.GunDamage *= DamageIncrease;
-            }
             if (bulletsmultiply)
             {
                 RightHand.bulletsToShoot *= bulletsAdded;

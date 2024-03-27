@@ -12,6 +12,7 @@ public class ArmScript : MonoBehaviour
     public Transform gunPoint;
     private GameObject bullets;
     private AbilitySelect pausing;
+    private StatManager stats;
 
     [Header("Bool")]
     public bool isLeftArm;
@@ -25,7 +26,8 @@ public class ArmScript : MonoBehaviour
     [Range(0, 10)] public float TimeToShoot = 1;
     public float spread;
     public int bulletsToShoot = 1;
-    public float GunDamage;
+    private float GunDamage;
+    public float damage = 1;
     public float angle;
     public float bulletspeed = 5;
 
@@ -42,6 +44,7 @@ public class ArmScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stats = FindAnyObjectByType<StatManager>();
         bullets = GameObject.Find("Bullets");
         pausing = FindAnyObjectByType<AbilitySelect>();
         mana = FindAnyObjectByType<Mana>();
@@ -66,6 +69,8 @@ public class ArmScript : MonoBehaviour
             Vector3 mouse_pos;
             Vector3 object_pos;
 
+
+
             mouse_pos = Input.mousePosition;
             object_pos = Camera.main.WorldToScreenPoint(transform.position);
             ShootTime += Time.deltaTime;
@@ -80,6 +85,7 @@ public class ArmScript : MonoBehaviour
             {
                 if (shooting)
                 {
+                    DamageMult();
                     mana.mana -= manaToShoot;
                     mana.shoot = true;
                     for (int i = 0; i < bulletsToShoot; i++)
@@ -123,5 +129,19 @@ public class ArmScript : MonoBehaviour
             default:
                 return fireBullet; // Default to fireBullet if the type is not recognized
         }
+    }
+    public void DamageMult()
+    {
+        Debug.Log(damage);
+        Debug.Log(stats.damageMultiplier);
+        if(stats.damageMultiplier != 0)
+        {
+            GunDamage = damage * stats.damageMultiplier;
+        }
+        else
+        {
+            GunDamage = damage;
+        }
+        Debug.Log(GunDamage);
     }
 }
