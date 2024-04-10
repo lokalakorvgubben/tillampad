@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth;
-    private float health;
+    public float health;
     private HealthBar healthBar;
     private StatManager statManager;
 
@@ -28,10 +28,6 @@ public class PlayerHealth : MonoBehaviour
     {
         maxHealth = statManager.playerMaxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        if (health <= 0)
-        {
-            Debug.Log("Dead");
-        }
         if(health > maxHealth)
         {
             health = maxHealth;

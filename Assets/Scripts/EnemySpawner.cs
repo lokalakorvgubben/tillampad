@@ -10,7 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public class EnemyVariant
     {
         public GameObject enemyPrefab;
-        public float spawnWeight = 1f; // Adjust as needed
+        public float spawnWeight = 1f;
+        public float spawnWeightIncrease = 1f;
     }
 
     private int enemyCount = 0;
@@ -22,8 +23,8 @@ public class EnemySpawner : MonoBehaviour
     public float TimeUntilIncrease = 600;
     public int EnemiesIncrease;
     public TextMeshProUGUI timeShow;
-    private float SecondsToShow;
-    private int MinutesToShow = 0;
+    public float SecondsToShow;
+    public int MinutesToShow = 0;
 
     public float spawnInterval = 3f;
     public float nextTimeToSpawn = 0f;
@@ -46,6 +47,11 @@ public class EnemySpawner : MonoBehaviour
         if(time >= TimeUntilIncrease)
         {
             maxEnemies += EnemiesIncrease;
+
+            foreach (EnemyVariant variant in enemyVariants)
+            {
+                variant.spawnWeight += variant.spawnWeightIncrease;
+            }
             time = 0;
         }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

@@ -10,7 +10,7 @@ public class PlayerLevel : MonoBehaviour
     private float XP = 0;
     public float maxXp;
     public int level = 1;
-    private int tmplevel = 1;
+    private int tmplevel = 0;
     public int lvlthreshold = 5;
 
     private AbilitySelect cardselect;
