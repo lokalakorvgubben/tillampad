@@ -8,14 +8,19 @@ public class cameraFollow : MonoBehaviour
 
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
+    private AbilitySelect pausing;
+
+    private void Start()
+    {
+        pausing = FindAnyObjectByType<AbilitySelect>();
+    }
     void Update()
     {
-        if (Time.timeScale > 0f)
+        if (pausing.paused == false)
         {
             Vector3 desiredPos = target.position + offset;
             Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed);
             transform.position = smoothedPos;
         }
-
     }
 }

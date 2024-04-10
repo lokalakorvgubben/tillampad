@@ -9,13 +9,18 @@ public class AbilitySelect : MonoBehaviour
     public GameObject cardAbilities;
     public Texture2D cursor;
     public GameObject PauseMenu;
+    public GameObject DeathUI;
     public bool paused = false;
+    private PlayerHealth player;
+    private GameObject InGameUI;
 
     private List<CardRandomizer> cardRandomizers = new List<CardRandomizer>();
 
     void Start()
     {
         FindCardRandomizers();
+        player = FindAnyObjectByType<PlayerHealth>();
+        InGameUI = transform.Find("InGameUI").gameObject;
     }
 
     void FindCardRandomizers()
@@ -37,7 +42,7 @@ public class AbilitySelect : MonoBehaviour
     }
     void Update()
     {
-        if(cardAbilities.activeSelf == false || PauseMenu.activeSelf == false)
+        if(cardAbilities.activeSelf == false && PauseMenu.activeSelf == false)
         {
             Time.timeScale = 1f;
             paused = false;
@@ -48,7 +53,17 @@ public class AbilitySelect : MonoBehaviour
             paused = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && PauseMenu.activeSelf == false)
+
+
+        if(player.health <= 0)
+        {
+            paused = true;
+            Time.timeScale = 0f;
+            DeathUI.SetActive(true);
+            InGameUI.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)
         {
             PauseMenu.SetActive(true);
         }

@@ -58,6 +58,10 @@ public class EnemyScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         effects = GameObject.Find("Effects");
+        if (WeepingAngel)
+        {
+            anim = SpriteRenderer.GetComponent<Animator>();
+        }
         time = TimeUntilAttack;
         statManager = player.GetComponent<StatManager>();
 
@@ -105,14 +109,33 @@ public class EnemyScript : MonoBehaviour
         //invert playermodel dependant on position to player
         positionToPlayer = transform.position.x - player.transform.position.x;
         //Debug.Log(positionToPlayer);
-        
-        if(positionToPlayer > 0)
+
+        if (!WeepingAngel)
         {
-            SpriteRenderer.flipX = true;
+            if(positionToPlayer > 0)
+            {
+                SpriteRenderer.flipX = true;
+            }
+            else if(positionToPlayer < 0){
+                SpriteRenderer.flipX = false;
+            }
         }
-        else if(positionToPlayer < 0){
-            SpriteRenderer.flipX = false;
+        else
+        {
+            if (!InSight)
+            {
+                if (positionToPlayer > 0)
+                {
+                    SpriteRenderer.flipX = true;
+                }
+                else if (positionToPlayer < 0)
+                {
+                    SpriteRenderer.flipX = false;
+                }
+            }
+
         }
+
 
         float step = speed * speedMult;
         agent.speed = step;
@@ -158,10 +181,12 @@ public class EnemyScript : MonoBehaviour
             if (!InSight)
             {
                 agent.SetDestination(LocationToMove);
+                anim.speed = 1;
             }
             else
             {
                 agent.SetDestination(transform.position);
+                anim.speed = 0;
             }
         }
 
@@ -189,6 +214,7 @@ public class EnemyScript : MonoBehaviour
     void Die()
     {
         Instantiate(blood, transform.position, Quaternion.identity);
+        statManager.totalKills++;
         Destroy(gameObject);
     }
     public void TakeDamage(float damage)

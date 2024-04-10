@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,11 +23,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (!paused)
         {
-            if (horizontalInput == -1)
+            Vector3 mouse_pos;
+            Vector3 object_pos;
+
+            mouse_pos = Input.mousePosition;
+            object_pos = Camera.main.WorldToScreenPoint(transform.position);
+
+            if (mouse_pos.x < object_pos.x)
             {
                 sr.flipX = true;
             }
-            else if (horizontalInput == 1)
+            else
             {
                 sr.flipX = false;
             }

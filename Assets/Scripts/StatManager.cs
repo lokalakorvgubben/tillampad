@@ -22,6 +22,8 @@ public class StatManager : MonoBehaviour
     //for future cloud change
     public float zapAmount = 3;
 
+    public int totalKills;
+
 
     public void RaiseStats()
     {

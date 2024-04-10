@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArmScript : MonoBehaviour
@@ -13,6 +14,7 @@ public class ArmScript : MonoBehaviour
     private GameObject bullets;
     private AbilitySelect pausing;
     private StatManager stats;
+    private GameObject sprite;
 
     [Header("Bool")]
     public bool isLeftArm;
@@ -49,6 +51,7 @@ public class ArmScript : MonoBehaviour
         pausing = FindAnyObjectByType<AbilitySelect>();
         mana = FindAnyObjectByType<Mana>();
         ShootTime = TimeToShoot;
+        sprite = transform.Find("Gun").gameObject;
     }
 
     // Update is called once per frame
@@ -69,12 +72,18 @@ public class ArmScript : MonoBehaviour
             Vector3 mouse_pos;
             Vector3 object_pos;
 
-
-
             mouse_pos = Input.mousePosition;
             object_pos = Camera.main.WorldToScreenPoint(transform.position);
             ShootTime += Time.deltaTime;
-
+            
+            if(mouse_pos.x < object_pos.x)
+            {
+                sprite.transform.localScale = new Vector3(sprite.transform.localScale.x, -5, transform.localScale.z);
+            }
+            else
+            {
+                sprite.transform.localScale = new Vector3(sprite.transform.localScale.x, 5, transform.localScale.z);
+            }
             mouse_pos.x = mouse_pos.x - object_pos.x;
             mouse_pos.y = mouse_pos.y - object_pos.y;
             angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
@@ -132,8 +141,6 @@ public class ArmScript : MonoBehaviour
     }
     public void DamageMult()
     {
-        Debug.Log(damage);
-        Debug.Log(stats.damageMultiplier);
         if(stats.damageMultiplier != 0)
         {
             GunDamage = damage * stats.damageMultiplier;
@@ -142,6 +149,5 @@ public class ArmScript : MonoBehaviour
         {
             GunDamage = damage;
         }
-        Debug.Log(GunDamage);
     }
 }
