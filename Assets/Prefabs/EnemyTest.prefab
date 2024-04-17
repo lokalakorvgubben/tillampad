@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0618482484e89458b7b9252cc1fdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunVariants:
+  - GunPrefab: {fileID: 6002225079706641785, guid: 094426690ff873e47bc5213aa7705c30, type: 3}
+    spawnWeight: 1
   damage: 1
   recoil: 0
   speed: 1
@@ -115,6 +118,7 @@ MonoBehaviour:
   Pawn: 0
   StandstillAttack: 0
   Attack: 0
+  Boss: 0
   blood: {fileID: 8165429250266976693, guid: b5fe9a25515b07c42a510efa40618fd8, type: 3}
   anim: {fileID: 0}
   lightning: {fileID: 3762152652433139665, guid: c1e325e619b35e145969cd51fb206192, type: 3}
@@ -5327,7 +5331,7 @@ MonoBehaviour:
   - {x: -0.0037260747, y: 0.12620965, z: 0}
   m_ShapePathHash: -727611814
   m_Mesh: {fileID: 0}
-  m_InstanceId: 40932
+  m_InstanceId: 55844
   m_LocalBounds:
     m_Center: {x: -0.004645556, y: 0.17639315, z: 0}
     m_Extent: {x: 0.041408934, y: 0.0815742, z: 0}

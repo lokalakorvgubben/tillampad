@@ -13,6 +13,7 @@ public class AbilitySelect : MonoBehaviour
     public bool paused = false;
     private PlayerHealth player;
     private GameObject InGameUI;
+    private GameObject weaponSelect;
 
     private List<CardRandomizer> cardRandomizers = new List<CardRandomizer>();
 
@@ -21,6 +22,7 @@ public class AbilitySelect : MonoBehaviour
         FindCardRandomizers();
         player = FindAnyObjectByType<PlayerHealth>();
         InGameUI = transform.Find("InGameUI").gameObject;
+        weaponSelect = transform.Find("InGameUI/WeaponSelect").gameObject;
     }
 
     void FindCardRandomizers()
@@ -42,12 +44,12 @@ public class AbilitySelect : MonoBehaviour
     }
     void Update()
     {
-        if(cardAbilities.activeSelf == false && PauseMenu.activeSelf == false)
+        if(cardAbilities.activeSelf == false && PauseMenu.activeSelf == false && weaponSelect.activeSelf == false)
         {
             Time.timeScale = 1f;
             paused = false;
         }
-        else if(cardAbilities.activeSelf == true || PauseMenu.activeSelf == true)
+        else if(cardAbilities.activeSelf == true || PauseMenu.activeSelf == true || weaponSelect.activeSelf == true)
         {
             Time.timeScale = 0f;
             paused = true;

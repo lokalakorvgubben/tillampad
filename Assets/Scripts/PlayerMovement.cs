@@ -7,7 +7,6 @@ using UnityEngine.U2D;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public float playerSpeed;
     public SpriteRenderer sr;
     public LayerMask groundLayer;
@@ -15,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
     float horizontalInput;
     private bool paused = false;
-    
+
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
