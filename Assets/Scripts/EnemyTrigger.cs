@@ -29,7 +29,7 @@ public class EnemyTrigger : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         // Draw the detection radius in the scene view for visual reference
         Gizmos.color = Color.yellow;

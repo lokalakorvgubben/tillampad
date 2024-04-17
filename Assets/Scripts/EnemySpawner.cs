@@ -21,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
 
     private float time;
     public float TimeUntilIncrease = 600;
+    public float TimeUntilBoss = 5;
+    private float bosstimer;
     public int EnemiesIncrease;
     public TextMeshProUGUI timeShow;
     public float SecondsToShow;
@@ -29,7 +31,6 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3f;
     public float nextTimeToSpawn = 0f;
     private GameObject player;
-    public GameObject EnemyTest;
     public GameObject enemies;
     [SerializeField] Vector3 spawnArea;
 
@@ -43,6 +44,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
+        bosstimer += Time.deltaTime;
         UpdateTime();
         if(time >= TimeUntilIncrease)
         {
@@ -53,6 +55,11 @@ public class EnemySpawner : MonoBehaviour
                 variant.spawnWeight += variant.spawnWeightIncrease;
             }
             time = 0;
+        }
+        if(bosstimer >= TimeUntilBoss)
+        {
+            bosstimer = 0;
+            SpawnBoss();
         }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -76,6 +83,24 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint), enemies.transform);
             spawnedEnemies.Add(newEnemy);
+        }
+    }
+
+    private void SpawnBoss()
+    {
+        Vector3 randomSpawnPoint = MakeRandomSpawnPos();
+        randomSpawnPoint += player.transform.position;
+
+        EnemyVariant randomEnemyVariant = GetRandomEnemyVariant();
+
+        if (randomSpawnPoint != null && randomEnemyVariant != null)
+        {
+            GameObject newEnemy = Instantiate(randomEnemyVariant.enemyPrefab, randomSpawnPoint, Quaternion.Euler(randomSpawnPoint), enemies.transform);
+            newEnemy.transform.localScale *= 2;
+            var EnemyScript = newEnemy.GetComponent<EnemyScript>();
+            EnemyScript.enemyHealth *= 2.5f;
+            EnemyScript.damage *= 2.5f;
+            EnemyScript.Boss = true;
         }
     }
 

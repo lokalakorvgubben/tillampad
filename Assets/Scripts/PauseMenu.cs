@@ -21,16 +21,11 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
-
     private void Update()
     {
-        if (transform.Find("PauseMenu").gameObject.activeSelf)
+        if (transform.Find("PauseMenu").gameObject.activeSelf || transform.Find("InGameUI/WeaponSelect").gameObject.activeSelf)
         {
             Time.timeScale = 0f;
-        }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Continue();
         }
     }
 }

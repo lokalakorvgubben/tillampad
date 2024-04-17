@@ -5,10 +5,19 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static EnemySpawner;
 using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
+    [System.Serializable]
+    public class GunVariant
+    {
+        public GameObject GunPrefab;
+        public float spawnWeight = 1f;
+    }
+
+    public List<GunVariant> gunVariants = new List<GunVariant>();
 
     [Header("Stats")]
     public float damage = 1;
@@ -37,6 +46,7 @@ public class EnemyScript : MonoBehaviour
     public bool Pawn;
     public bool StandstillAttack = false;
     public bool Attack = false;
+    public bool Boss = false;
 
     [Header("References")]
     public GameObject blood;
@@ -193,6 +203,10 @@ public class EnemyScript : MonoBehaviour
 
         if(enemyHealth <= 0)
         {
+            if (Boss)
+            {
+                DropGun();
+            }
             DropXP();
             Die();
         }
@@ -211,6 +225,13 @@ public class EnemyScript : MonoBehaviour
         //maybe call function here to the xp to assign xp value depending on what died
         Instantiate(ExperiencePoint, gameObject.transform.position, gameObject.transform.rotation, effects.transform);
     }
+
+    void DropGun()
+    {
+        GunVariant randomGunVariant = GetRandomGunVariant();
+        Instantiate(randomGunVariant.GunPrefab, gameObject.transform.position, gameObject.transform.rotation, effects.transform);
+    }
+
     void Die()
     {
         Instantiate(blood, transform.position, Quaternion.identity);
@@ -370,5 +391,32 @@ public class EnemyScript : MonoBehaviour
         Attack = false;
         anim.SetBool("Attack", false);
         time = 0;
+    }
+
+    private GunVariant GetRandomGunVariant()
+    {
+        if (gunVariants.Count > 0)
+        {
+            float totalWeight = 0f;
+
+            foreach (GunVariant variant in gunVariants)
+            {
+                totalWeight += variant.spawnWeight;
+            }
+
+            float randomValue = Random.Range(0f, totalWeight);
+
+            foreach (GunVariant variant in gunVariants)
+            {
+                if (randomValue <= variant.spawnWeight)
+                {
+                    return variant;
+                }
+
+                randomValue -= variant.spawnWeight;
+            }
+        }
+
+        return null;
     }
 }
