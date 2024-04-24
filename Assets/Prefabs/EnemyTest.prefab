@@ -127,6 +127,8 @@ MonoBehaviour:
   Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
   ExperiencePoint: {fileID: 2881586264876284474, guid: d225a6e2a108aec4ba09ea26053932d7, type: 3}
   statManager: {fileID: 0}
+  ThunderBolt: {fileID: 3170466227983379168, guid: a4b1f3a2924d5b7459b9a8dc95004a9a, type: 3}
+  Explosion: {fileID: 855120191292580079, guid: c155452491dcf024ba1703d4954beecf, type: 3}
 --- !u!195 &6404839929193674170
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5331,7 +5333,7 @@ MonoBehaviour:
   - {x: -0.0037260747, y: 0.12620965, z: 0}
   m_ShapePathHash: -727611814
   m_Mesh: {fileID: 0}
-  m_InstanceId: 55844
+  m_InstanceId: 49720
   m_LocalBounds:
     m_Center: {x: -0.004645556, y: 0.17639315, z: 0}
     m_Extent: {x: 0.041408934, y: 0.0815742, z: 0}

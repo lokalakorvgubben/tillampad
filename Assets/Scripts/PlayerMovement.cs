@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using TreeEditor;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,15 +8,16 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer sr;
     public LayerMask groundLayer;
 
-    float verticalInput;
-    float horizontalInput;
+    private CircleCollider2D circleCollider;
     private bool paused = false;
+
+    void Start()
+    {
+        circleCollider = GetComponent<CircleCollider2D>();
+    }
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
         if (!paused)
         {
             Vector3 mouse_pos;
@@ -38,18 +36,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
 
         Vector2 moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
         Vector2 moveSpeed = moveDirection * Time.deltaTime * playerSpeed;
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, circleCollider.radius, moveDirection, moveSpeed.magnitude, groundLayer);
 
-        Vector2 newPosition = (Vector2)transform.position + moveSpeed;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 0.1f, groundLayer);
-        if (colliders.Length > 0)
+        if (hit.collider != null)
         {
-            transform.Translate(moveSpeed);
+            Vector2 slideDirection = Vector2.Reflect(moveDirection, hit.normal);
+            moveSpeed = slideDirection * Time.deltaTime * playerSpeed;
         }
+
+        transform.Translate(moveSpeed);
     }
-
-
 }
