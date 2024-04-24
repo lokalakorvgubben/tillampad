@@ -31,37 +31,53 @@ public class GunStats : MonoBehaviour
     {
         CheckForPlayer();
     }
+
+    private bool isPlayerDetected = false;
+
     private void CheckForPlayer()
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position + pivot, detectionRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + pivot, detectionRadius);
+        bool playerFound = false;
 
-        if (collider.gameObject.GetComponent<PlayerMovement>())
+        foreach (Collider2D collider in colliders)
         {
-            if(collider != null)
+            if (collider.gameObject.GetComponent<PlayerMovement>())
             {
-                InteractUI.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.F))
+                float distanceToPlayer = Vector2.Distance(transform.position, collider.transform.position);
+                if (distanceToPlayer <= detectionRadius)
                 {
-                    gunSelect.SetActive(true);
-                    var stats = gunSelect.GetComponent<StoreGunStats>();
+                    playerFound = true;
+                    isPlayerDetected = true;
+                    InteractUI.SetActive(true);
 
-                    stats.damage = damage;
-                    stats.bulletspeed = bulletspeed;
-                    stats.bulletsToShoot = bulletsToShoot;
-                    stats.manaToShoot = manaToShoot;
-                    stats.spread = spread;
-                    stats.gunSprite = gunSprite;
-                    stats.TimeToShoot = TimeToShoot;
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        gunSelect.SetActive(true);
+                        var stats = gunSelect.GetComponent<StoreGunStats>();
 
-                    Destroy(gameObject);
+                        stats.damage = damage;
+                        stats.bulletspeed = bulletspeed;
+                        stats.bulletsToShoot = bulletsToShoot;
+                        stats.manaToShoot = manaToShoot;
+                        stats.spread = spread;
+                        stats.gunSprite = gunSprite;
+                        stats.TimeToShoot = TimeToShoot;
+
+                        Destroy(gameObject);
+                        return;
+                    }
                 }
             }
         }
-        else
+
+        if (!playerFound && isPlayerDetected)
         {
             InteractUI.SetActive(false);
+            isPlayerDetected = false;
         }
     }
+
+
 
     GameObject FindInActiveObjectByName(string name)
     {

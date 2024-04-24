@@ -66,6 +66,7 @@ MonoBehaviour:
   desiredDistanceY: 0
   flareFireScale: 1
   graceTimer: 2
+  TotalThunderBolts: 0
   InSight: 0
   onFire: 0
   onLightning: 0
@@ -82,6 +83,7 @@ MonoBehaviour:
   Flare: {fileID: 1944297896687408415, guid: 0be996a426c89cf4d8b29e784198c7bb, type: 3}
   ExperiencePoint: {fileID: 2881586264876284474, guid: d225a6e2a108aec4ba09ea26053932d7, type: 3}
   statManager: {fileID: 0}
+  ThunderBolt: {fileID: 3170466227983379168, guid: a4b1f3a2924d5b7459b9a8dc95004a9a, type: 3}
 --- !u!114 &6115380423603744915
 MonoBehaviour:
   m_ObjectHideFlags: 0

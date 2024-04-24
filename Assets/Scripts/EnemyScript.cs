@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static EnemySpawner;
 using static UnityEngine.GraphicsBuffer;
 
@@ -37,6 +38,8 @@ public class EnemyScript : MonoBehaviour
     private float timer = 0;
     public float graceTimer = 1.5f;
     private float positionToPlayer;
+    public float explosionRadius = 3;
+    public float explosionDamage = 10;
 
     [Header("Bools")]
     public bool InSight;
@@ -62,6 +65,8 @@ public class EnemyScript : MonoBehaviour
     public GameObject Flare;
     public GameObject ExperiencePoint;
     public StatManager statManager;
+    public GameObject ThunderBolt;
+    public GameObject Explosion;
 
 
     void Start()
@@ -247,6 +252,13 @@ public class EnemyScript : MonoBehaviour
     {
         enemyHealth -= 25;
         Invoke("KillCloud", 0.6f);
+        for (int i = 0; i < statManager.thunderBoltAmount; i++)
+        {
+            float ran = Random.Range(360, -360);
+            GameObject thunderBolt = Instantiate(ThunderBolt, transform.position, Quaternion.Euler(new Vector3(0, 0, ran)));
+
+            thunderBolt.GetComponent<ThunderBolt>().spawner = this.gameObject;
+        }
     }
     public void KillCloud()
     {
@@ -299,15 +311,29 @@ public class EnemyScript : MonoBehaviour
         
         if(onFire && isWind)
         {
-            Debug.Log("spawn flare");
-            Debug.Log(zRotation);
             SpawnFlares(zRotation);
+        }
+
+        if(onFire && isLightning || onLightning && isFire)
+        {
+            Debug.Log("Explosive Combustion");
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+
+            GameObject explosive = Instantiate(Explosion, transform.position, transform.rotation);
+            explosive.transform.localScale = new Vector3(explosionRadius, explosionRadius, 1);
+            foreach (Collider2D collider in colliders)
+            {
+                EnemyScript enemyScript = collider.GetComponent<EnemyScript>();
+                if (enemyScript != null)
+                {
+                    enemyScript.TakeDamage(explosionDamage);
+                }
+            }
         }
     }
     public void SpawnFlares(float zRotation)
     {
         //Instantiate()
-        Debug.Log("FUCKING NUKE");
 
         //GameObject newFlareObject = Instantiate(Flare, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(-50, 50) + zRotation)), effects.transform);
         for (int i = 0; i < statManager.flaresAmount; i++)

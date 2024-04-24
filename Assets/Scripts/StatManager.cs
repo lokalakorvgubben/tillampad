@@ -19,8 +19,7 @@ public class StatManager : MonoBehaviour
     [SerializeField]
     public int lightningJumps = 3;
     public float flaresAmount = 3;
-    //for future cloud change
-    public float zapAmount = 3;
+    public float thunderBoltAmount = 3;
 
     public int totalKills;
 
