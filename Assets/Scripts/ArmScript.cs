@@ -10,28 +10,28 @@ public class ArmScript : MonoBehaviour
     public GameObject fireBullet;
     public GameObject lightningBullet;
     public GameObject windBullet;
-    public Transform gunPoint;
+    public Transform gunPoint; // The point from where bullets are fired
     private GameObject bullets;
     private AbilitySelect pausing;
     private StatManager stats;
     private GameObject sprite;
 
     [Header("Bool")]
-    public bool isLeftArm;
+    public bool isLeftArm; // Indicates if this script is controlling the left arm
     private bool shooting;
-    public bool allowButtonHold;
+    public bool allowButtonHold; // Indicates if holding the button is allowed for continuous shooting
 
     [Header("Gun Stats")]
     private Mana mana;
-    public float manaToShoot;
+    public float manaToShoot; // Mana cost per shot
     private float ShootTime = 0;
     [Range(0, 10)] public float TimeToShoot = 1;
-    public float spread;
-    public int bulletsToShoot = 1;
-    private float GunDamage;
+    public float spread; // Bullet spread angle
+    public int bulletsToShoot = 1; // Number of bullets to shoot at once
+    private float GunDamage; // Calculated gun damage
     public float damage = 1;
-    public float angle;
-    public float bulletspeed = 5;
+    public float angle; // Shooting angle
+    public float bulletspeed = 5; // Speed of the bullets
 
     public enum BulletType
     {
@@ -41,9 +41,9 @@ public class ArmScript : MonoBehaviour
         // Add more bullet types as needed
     }
 
-    public BulletType currentBulletType = BulletType.Fire;
+    public BulletType currentBulletType = BulletType.Fire; // Current selected bullet type
 
-    // Start is called before the first frame update
+    // Find All Objects
     void Start()
     {
         stats = FindAnyObjectByType<StatManager>();
@@ -54,9 +54,9 @@ public class ArmScript : MonoBehaviour
         sprite = transform.Find("Gun").gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Determine shooting based on mouse button and whether button hold is allowed
         if (!isLeftArm)
         {
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse1);
@@ -67,16 +67,19 @@ public class ArmScript : MonoBehaviour
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
-        if(pausing.paused == false)
-        {
-            Vector3 mouse_pos;
-            Vector3 object_pos;
 
-            mouse_pos = Input.mousePosition;
-            object_pos = Camera.main.WorldToScreenPoint(transform.position);
-            ShootTime += Time.deltaTime;
+        // If the game is not paused
+        if (pausing.paused == false)
+        {
+            Vector3 mouse_pos; // Position of the mouse
+            Vector3 object_pos; // Position of the object
+
+            mouse_pos = Input.mousePosition; // Get mouse position
+            object_pos = Camera.main.WorldToScreenPoint(transform.position); // Get object position in screen coordinates
+            ShootTime += Time.deltaTime; // Increment shoot timer
             
-            if(mouse_pos.x < object_pos.x)
+            // Flip the sprite based on the mouse position
+            if (mouse_pos.x < object_pos.x)
             {
                 sprite.transform.localScale = new Vector3(sprite.transform.localScale.x, -5, transform.localScale.z);
             }
@@ -84,46 +87,51 @@ public class ArmScript : MonoBehaviour
             {
                 sprite.transform.localScale = new Vector3(sprite.transform.localScale.x, 5, transform.localScale.z);
             }
+
+            // Calculate the angle to the mouse position
             mouse_pos.x = mouse_pos.x - object_pos.x;
             mouse_pos.y = mouse_pos.y - object_pos.y;
             angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-
+            // If the shoot timer has elapsed and there's enough mana, shoot
             if (ShootTime > TimeToShoot && mana.mana >= manaToShoot)
             {
                 if (shooting)
                 {
-                    DamageMult();
-                    mana.mana -= manaToShoot;
-                    mana.shoot = true;
+                    DamageMult(); // Calculate gun damage with multiplier
+                    mana.mana -= manaToShoot; // Deduct mana cost
+                    mana.shoot = true; // Indicate shooting
                     for (int i = 0; i < bulletsToShoot; i++)
                     {
-                        float x = Random.Range(-spread, spread);
-                        GameObject bulletPrefab = GetBulletPrefab();
+                        float x = Random.Range(-spread, spread); // Apply bullet spread
+                        GameObject bulletPrefab = GetBulletPrefab(); // Get the bullet prefab based on current type
+                        // Instantiate the bullet and initialize its properties
                         Instantiate(bulletPrefab, gunPoint.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
                             .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
                     }
 
-                    ShootTime = 0;
+                    ShootTime = 0; // Reset shoot timer
                 }
+
+                // TEST, not FINAL, shooting condition for space key
                 if (Input.GetKeyDown(KeyCode.Space) && !isLeftArm)
                 {
-
                     for (int i = 0; i < bulletsToShoot; i++)
                     {
-                        float x = Random.Range(-spread, spread);
-                        Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform);
-                        Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform)
+                        float x = Random.Range(-spread, spread); // Apply bullet spread
+                        Instantiate(fireBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform); // Fire bullet
+                        Instantiate(windBullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle + x)), bullets.transform) // Wind bullet
                             .GetComponent<SimpleBulletScript>().Initialize(GunDamage, bulletspeed);
                     }
 
-                    ShootTime = 0;
+                    ShootTime = 0; // Reset shoot timer
                 }
             }
         }
-
     }
+
+    // Method to get the bullet prefab based on current bullet type
     GameObject GetBulletPrefab()
     {
         switch (currentBulletType)
@@ -139,9 +147,11 @@ public class ArmScript : MonoBehaviour
                 return fireBullet; // Default to fireBullet if the type is not recognized
         }
     }
+
+    // Method to calculate gun damage with multiplier
     public void DamageMult()
     {
-        if(stats.damageMultiplier != 0)
+        if (stats.damageMultiplier != 0)
         {
             GunDamage = damage * stats.damageMultiplier;
         }
